@@ -3,11 +3,7 @@
 .mgb-5{
   margin-bottom: 5px;
 }
-.thead th {
-    text-align: left;
-    max-width: 100%;
-    min-width: 40%;
-}
+
 /* content */
 .content-wrap {
   height: auto;
@@ -37,7 +33,7 @@
 .left-frame {
   position: relative;
   padding: 0 1em;
-  max-width: 1200px;
+  max-width: 900px;
   margin-bottom: 20px;
 }
 
@@ -67,7 +63,26 @@
   margin-top: 20px;
   width: 100%;
 }
-
+.form-groups table{
+    width: 100%;
+}
+.form-groups thead{
+    border-bottom: 1px solid #3a3a3a;
+}
+.form-groups thead div{
+    margin-bottom: 10px;
+}
+.form-groups thead th{
+    text-align: left;
+    width: 33%;
+}
+.form-groups tbody{
+    padding-top: 5px;
+}
+.form-groups tbody div{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 .form-groups p{
   color: rgb(100, 100, 100);
   font-size: 14px;
