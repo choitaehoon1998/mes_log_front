@@ -3,6 +3,11 @@
 .mgb-5{
   margin-bottom: 5px;
 }
+.thead th {
+    text-align: left;
+    max-width: 100%;
+    min-width: 40%;
+}
 /* content */
 .content-wrap {
   height: auto;
@@ -32,7 +37,7 @@
 .left-frame {
   position: relative;
   padding: 0 1em;
-  max-width: 600px;
+  max-width: 1200px;
   margin-bottom: 20px;
 }
 
