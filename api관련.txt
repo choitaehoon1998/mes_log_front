@@ -1,0 +1,2 @@
+목록 조회 API URI  =  http://0c4a-175-119-149-98.ngrok.io/log [GET] param : [userName, companyCode, exceptionClass,exceptionMessage,method, requestUri, remoteHost, startDate(ex: yyyy-mm-dd) , endDate(ex: yyyy-mm-dd),size,page]
+상세 조회 API URI  =  http://0c4a-175-119-149-98.ngrok.io/log [GET] param : [없음]
