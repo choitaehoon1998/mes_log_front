@@ -20,19 +20,21 @@ export default  function ErrorLog() {
                 <div className="content-main">
                     <ContentTitle title="Error Log"></ContentTitle>
 
-                    <input className="ml-1000"></input>
-
                     <div className="left-frame">
                         <div className="form-frame frame1">
+                            
+                            <input placeholder="search"></input>
+
                             <div className="form-groups">
+                                
                                 <label>
                                     목록
                                 </label>
+
                             <table>
                                 <Thead></Thead>
 
                                 <Tbody no="1" id="testidtestid" name="userName" date="00-00-00" link=""></Tbody>
-
 
                             </table>
                             </div>
