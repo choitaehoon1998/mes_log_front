@@ -3,6 +3,45 @@
 .mgb-5{
   margin-bottom: 5px;
 }
+.pt{
+  padding-top: 5px;
+}
+.pl-10{
+  padding-left: 10px;
+}
+.ml-1000{
+  margin-left: 700px;
+}
+.br-1{
+  border: 1px solid #3a3a3a;
+}
+.verMid{
+  vertical-align: middle;
+}
+.textMid{
+  text-align: center;
+}
+.textRight{
+  text-align: right;
+}
+.textLeft{
+  text-align: left;
+}
+.h25{
+  height: 25px;
+}
+.w-40{
+  width: 40px;
+}
+.w-100{
+  width: 100px;
+}
+.w-200{
+  width: 200px;
+}
+.w-30p{
+  width: 30%;
+}
 
 /* content */
 .content-wrap {
@@ -68,20 +107,6 @@
 }
 .form-groups thead{
     border-bottom: 1px solid #3a3a3a;
-}
-.form-groups thead div{
-    margin-bottom: 10px;
-}
-.form-groups thead th{
-    text-align: left;
-    width: 33%;
-}
-.form-groups tbody{
-    padding-top: 5px;
-}
-.form-groups tbody div{
-    margin-top: 10px;
-    margin-bottom: 10px;
 }
 .form-groups p{
   color: rgb(100, 100, 100);

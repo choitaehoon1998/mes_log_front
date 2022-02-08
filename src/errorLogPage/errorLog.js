@@ -1,9 +1,18 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "./errorLog.css";
+import axios from "axios";
 import ContentTitle from "../content/ContentTitel";
+import Thead from "./thead";
+import Tbody from "./tbody";
 
+export default  function ErrorLog() {
+    const [users, setUsers] = useState([]);
 
-export default function ErrorLog() {
+    useEffect(() => {
+        axios.get("http://0c4a-175-119-149-98.ngrok.io/log")
+        .then(response => setUsers(response.data))
+        .catch(err => console.log(err))
+    },[]);
     return( 
         <>
         <div className="content-wrap">
@@ -11,7 +20,7 @@ export default function ErrorLog() {
                 <div className="content-main">
                     <ContentTitle title="Error Log"></ContentTitle>
 
-                    <div>검색창부분</div>
+                    <input className="ml-1000"></input>
 
                     <div className="left-frame">
                         <div className="form-frame frame1">
@@ -20,36 +29,9 @@ export default function ErrorLog() {
                                     목록
                                 </label>
                             <table>
-                                <thead >
-                                        <tr >
-                                            <th>ID</th>
-                                            <th>name</th>
-                                            <th>Send Date</th>
-                                        </tr>
-                                </thead>
-                            
+                                <Thead></Thead>
 
-                                <tbody >
-
-                                    
-                                        <tr>
-                                            <td>61f1fc28a7e6af781d4f179d</td>
-                                            <td>userName</td>
-                                            <td>sendDate</td>
-                                        </tr>
-
-                                </tbody>
-
-                                <tbody >
-
-                                    
-                                        <tr>
-                                            <td>61f1fc28a7e6af781d4f179d</td>
-                                            <td>userName</td>
-                                            <td>sendDate</td>
-                                        </tr>
-
-                                </tbody>
+                                <Tbody no="1" id="testidtestid" name="userName" date="00-00-00" link=""></Tbody>
 
 
                             </table>
@@ -57,9 +39,14 @@ export default function ErrorLog() {
 
                         </div>
                     </div>
-
+                    
                 </div>
             </div>
+        </div>
+        <div>
+            <ul>
+                {users.map(user => <li ket={user._id}>{user.userName}</li>)}
+            </ul>
         </div>
         </>
     );
