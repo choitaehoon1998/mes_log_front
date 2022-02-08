@@ -5,6 +5,7 @@ import ContentTitle from "../content/ContentTitel";
 import Thead from "./thead";
 import Tbody from "./tbody";
 import Pagination from "./pagination";
+import Paging from "./paging";
 
 export default function ErrorLog() {
   const [errors, setErrors] = useState([]);
