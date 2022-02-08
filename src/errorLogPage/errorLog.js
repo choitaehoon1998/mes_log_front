@@ -17,7 +17,6 @@ export default function ErrorLog() {
       .then((response) => {
         setErrors(response.data.content);
         console.log(response.data.content);
-        console.log("searchKeyword == " + searchKeyword);
       })
       .catch((err) => console.log(err));
   }, [searchKeyword]);
@@ -47,7 +46,7 @@ export default function ErrorLog() {
                         name={error.userName}
                         date={error.sendDateTime.substring(0, 10)}
                         time={error.sendDateTime.substring(11, 19)}
-                        link=""
+                        link={error._id}
                       ></Tbody>
                     ))}
                   </table>

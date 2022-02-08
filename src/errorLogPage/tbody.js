@@ -10,7 +10,9 @@ export default function Tbody(props) {
         <td className="br-1 verMid textMid">{props.date}</td>
         <td className="br-1 verMid textMid">{props.time}</td>
         <td className="br-1 textMid verMid ">
-          <Link to={props.link}>보기</Link>
+          <Link to="/detail" state={{ id: props.link }}>
+            보기
+          </Link>
         </td>
       </tr>
     </tbody>
