@@ -1,6 +1,6 @@
 import React from "react";
 
-const Paging = ({postPerPage, totalPosts, paginate}) =>{
+const Psaging = ({postPerPage, totalPosts, paginate}) =>{
 const pageNumbers = [];
 
 for(let i=1; i<=Math.ceil(totalPosts / postPerPage); i++){
@@ -17,4 +17,4 @@ return(
     </nav>
     );
 }
-export default Paging;
+export default Psaging;
