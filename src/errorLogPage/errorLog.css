@@ -75,6 +75,7 @@
   font-weight: normal;
 }
 
+
 .form-control {
   border-radius: 0.1rem;
   outline: initial !important;
@@ -88,4 +89,35 @@
   line-height: 1;
   display: block;
   width: 90%;
+}
+
+/* 버튼 */
+.btn-color {
+  transition: 0.2s;
+  background-color: rgb(185, 13, 13);
+  color: #fff;
+  cursor: pointer;
+  outline: none;
+  border: none;
+}
+
+.btn{
+  border-radius: 50px;
+  outline: initial !important;
+  box-shadow: none !important;
+  font-size: 0.8rem;
+  padding: 0.2rem 1.4rem;
+  width: max-content;
+  height: 31px;
+}
+
+/* 폼스타일 */
+.form-control1 {
+  width: 40%;
+  border-radius: 2px;
+  border: 1px solid rgb(173, 170, 170);
+  height: 30px;
+  line-height: 30px;
+  background-color: #fff;
+  margin-left: 10px;
 }
