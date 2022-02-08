@@ -4,9 +4,12 @@ import axios from "axios";
 import ContentTitle from "../content/ContentTitel";
 import Thead from "./thead";
 import Tbody from "./tbody";
+import Pagination from "./pagination";
 
 export default function ErrorLog() {
   const [errors, setErrors] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postPerPage] = useState(10);
 
   useEffect(() => {
     axios
@@ -17,6 +20,13 @@ export default function ErrorLog() {
       })
       .catch((err) => console.log(err));
   }, []);
+
+  const indexOfLastPost = currentPage * postPerPage;
+  const indexOfFirstPost = indexOfLastPost - postPerPage;
+  const currentPosts = errors.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = pageNum => setCurrentPage(pageNum);
+
   return (
     <>
       <div className="content-wrap">
@@ -24,32 +34,32 @@ export default function ErrorLog() {
           <div className="content-main">
             <ContentTitle title="Error Log"></ContentTitle>
 
-            <input className="ml-1000"></input>
-
             <div className="left-frame">
               <div className="form-frame frame1">
+                  
+                <input type="text" name="keyword" id="search" placeholder="Search"></input>
+
                 <div className="form-groups">
+                
                   <label>목록</label>
                   <table>
                     <Thead></Thead>
-                    {errors.map((error) => (
-                      <Tbody
-                        no={error._id}
-                        id={error._id}
-                        name={error.userName}
-                        date={error.sendDateTime}
-                        link=""
-                      ></Tbody>
-                    ))}
+                    <Tbody props={currentPosts} />
                   </table>
+                  <Pagination
+                    postPerPage={postPerPage}
+                    totalPosts={errors.length}
+                    paginate={paginate}
+                    />
+
                 </div>
               </div>
             </div>
+
+            
+
           </div>
         </div>
-      </div>
-      <div>
-        <ul></ul>
       </div>
     </>
   );

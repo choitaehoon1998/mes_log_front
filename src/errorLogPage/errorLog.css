@@ -3,7 +3,10 @@
 .mgb-5{
   margin-bottom: 5px;
 }
-.pt{
+.p-5{
+  padding: 0 5px 0 5px;
+}
+.pt-5{
   padding-top: 5px;
 }
 .pl-10{
@@ -27,11 +30,14 @@
 .h25{
   height: 25px;
 }
-.w-40{
-  width: 44px;
+.w-55{
+  width: 55px;
 }
 .w-100{
   width: 100px;
+}
+.w-100p{
+  width: 100%;
 }
 .w-200{
   width: 200px;
@@ -99,9 +105,6 @@
   margin-top: 20px;
   width: 100%;
 }
-.form-groups table{
-    width: 100%;
-}
 .form-groups thead{
     border-bottom: 1px solid #3a3a3a;
 }
@@ -130,4 +133,17 @@
   line-height: 1;
   display: block;
   width: 90%;
+}
+
+/* pagination */
+.pagination li {
+  display: inline-block;
+  width: 17px;
+  height: 17px;
+  border-radius: 10px;
+}
+.pagination li:hover{
+  background-color: #d7d7d7;
+  
+  
 }
