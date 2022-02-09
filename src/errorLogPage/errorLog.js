@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./errorLog.css";
 import axios from "axios";
+
 import ContentTitle from "../content/ContentTitel";
 import SearchForm from "../components/SearchForm";
 import Thead from "./thead";
@@ -12,8 +13,9 @@ export default function ErrorLog() {
   const [total, setTotal] = useState(0);
   const [searchKeyword, setSearchKeyword] = useState("");
 
-  useEffect(() => {
-      axios
+  
+  useEffect(async() => {
+      await axios
         .get("http://a50b-175-119-149-98.ngrok.io/log", {
           params: { size: 10, page: page, companyCode: searchKeyword },
       })
@@ -21,7 +23,6 @@ export default function ErrorLog() {
         setTotal(Math.ceil(response.data.totalElements / 10) - 1);
         setErrors(response.data.content);
         console.log(response.data.content);
-        
       })
       .catch((err) => console.log(err));
   }, [searchKeyword]);
