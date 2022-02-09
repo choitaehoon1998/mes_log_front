@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import ErrorLogModal from "../errorLogPage/errorLogmodal";
 
 export default function Tbody(props) {
