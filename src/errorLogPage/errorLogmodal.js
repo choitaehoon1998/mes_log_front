@@ -1,26 +1,21 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-// import { useLocation } from "react-router";
 import ErrorModal from "../component/errormodalpop";
 import ErrorInput from "../component/errorinput";
 import TextArea from "../component/textarea";
 
 function ErrorLogModal(props) {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [detailInfo, setDetailInfo] = useState([]);
-  // const location = useLocation();
+  const [modalOpen, setModalOpen] = useState(false); //모달오픈
+  const [detailInfo, setDetailInfo] = useState([]); //axios 로그조회
 
-  /*로그 조회 effect */
-  useEffect(() => {
-    axios
+  // 모달 열고 닫기할때 로그 불러오기
+  const openModal = async () => {
+    await axios
       .get("http://a50b-175-119-149-98.ngrok.io/log/" + props.state.id)
       .then((response) => {
         setDetailInfo(response.data);
       })
       .catch((err) => console.log(err));
-  }, [props.state.id]);
-
-  const openModal = () => {
     setModalOpen(true);
   };
   const closeModal = () => {
@@ -30,9 +25,11 @@ function ErrorLogModal(props) {
   return (
     <>
       <React.Fragment>
-        <button className="btn btn-color" onClick={openModal}>
-          lookup
-        </button>
+        {detailInfo && (
+          <button className="btn btn-color" onClick={openModal}>
+            lookup
+          </button>
+        )}
         <ErrorModal
           open={modalOpen}
           close={closeModal}
