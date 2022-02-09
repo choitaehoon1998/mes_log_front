@@ -46,10 +46,6 @@ export default function ErrorLog() {
        })
      }
   }
-const log = () => {
-  console.log(total)
-  console.log(page)
-}
 
   return (
     <>
@@ -72,7 +68,6 @@ const log = () => {
                     <button onClick={onPrev} >이전</button>
                     &nbsp;{page+1} / {total+1}&nbsp;
                     <button onClick={onNext} >다음</button>
-                    <button onClick={log}>log</button>
                   </table>
                 </div>
               </div>
