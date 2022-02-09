@@ -1,5 +1,12 @@
+/* 에러로그 목록 및 목록 페이지 스타일 css  */
+
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
+.notosanskr * {
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+/* margin 및 padding */
 .mgb-5 {
   margin-bottom: 5px;
 }
@@ -12,9 +19,8 @@
 .ml-1000 {
   margin-left: 700px;
 }
-.br-1 {
-  border: 1px solid #3a3a3a;
-}
+
+/* border 및  정렬 */
 .verMid {
   vertical-align: middle;
 }
@@ -27,6 +33,8 @@
 .textLeft {
   text-align: left;
 }
+
+/*  높이 및 넓이 */
 .h25 {
   height: 25px;
 }
@@ -43,7 +51,7 @@
   width: 30%;
 }
 
-/* content */
+/* content 레이아웃 사이즈 */
 .content-wrap {
   height: auto;
 }
@@ -63,35 +71,27 @@
 .content-title {
   margin: 40px 0 40px 0;
   padding-bottom: 10px;
-  border-bottom: 2px solid #444;
+  border-bottom: 2px solid #1c1c1c;
+  font-family: "Noto Sans KR", sans-serif;
 }
 .content-title h3 {
   margin: 20px 0 10px 0;
   font-size: 20px;
 }
-.left-frame {
-  position: relative;
-  padding: 0 1em;
-  max-width: 900px;
+
+.main-frame {
+  margin-top: 20px;
   margin-bottom: 20px;
+  width: 100%;
 }
 
-.notosanskr * {
-  font-family: "Noto Sans KR", sans-serif;
-}
-
-/*                                   공용 form 스타일  */
 .form-frame {
-  font-family: "Noto Sans KR", sans-serif;
-  padding: 1.75rem;
-  border: 1px solid rgb(173, 170, 170);
+  border: 1px solid rgb(233, 233, 233);
   border-radius: 5px;
-  width: 90%;
+  width: auto;
   height: auto;
+  padding: 10px 30px;
   box-shadow: 0 1px 15px rgb(0 0 0 / 4%), 0 1px 6px rgb(0 0 0 / 4%);
-}
-.form-frame1 > form > label {
-  font-weight: bold;
 }
 
 .form-groups {
@@ -100,35 +100,49 @@
   margin-top: 20px;
   width: 100%;
 }
+/* 페이지 내의 회사 코드 검색 form 스타일 */
+.form-group label {
+  margin-right: 20px;
+  font-family: "Noto Sans KR", sans-serif;
+}
+.form-group input {
+  width: 200px;
+  height: 20px;
+  border-radius: 2px;
+  border: 1px solid rgb(209, 209, 209);
+  outline: none;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+/* 테이블 스타일  */
 .form-groups table {
   width: 100%;
 }
 .form-groups thead {
-  border-bottom: 1px solid #3a3a3a;
-}
-.form-groups p {
-  color: rgb(100, 100, 100);
-  font-size: 14px;
-  margin-bottom: 5px;
+  border-bottom: 1px solid #daddd8;
+  color: #595959;
+  font-family: "Noto Sans KR", sans-serif;
 }
 
-.form-groups label {
-  display: inline-block;
-  margin-bottom: 10px;
+.form-groups tbody {
+  border-radius: 20px;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+.form-groups tbody tr {
+  height: 38px;
+}
+.form-groups tbody tr td:first-of-type {
+  color: #595959;
+}
+.form-groups tbody tr td {
+  border: 1px solid #daddd8;
+  color: #595959;
   font-weight: normal;
+  font-size: 14px;
 }
 
-.form-control {
-  border-radius: 0.1rem;
-  outline: initial !important;
-  box-shadow: none !important;
-  font-size: 0.8rem;
-  border: 1px solid #d7d7d7;
-  background: #fff;
-  color: #3a3a3a;
-  height: auto;
-  padding: 0.5rem 0.75rem;
-  line-height: 1;
-  display: block;
-  width: 90%;
+.form-groups tbody tr td {
+  border-left: none;
+  border-right: none;
 }

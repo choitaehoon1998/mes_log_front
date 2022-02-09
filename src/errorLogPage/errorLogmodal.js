@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useLocation } from "react-router";
+// import { useLocation } from "react-router";
 import ErrorModal from "../component/errormodalpop";
 import ErrorInput from "../component/errorinput";
 import TextArea from "../component/textarea";
@@ -8,8 +8,9 @@ import TextArea from "../component/textarea";
 function ErrorLogModal(props) {
   const [modalOpen, setModalOpen] = useState(false);
   const [detailInfo, setDetailInfo] = useState([]);
-  const location = useLocation();
+  // const location = useLocation();
 
+  /*로그 조회 effect */
   useEffect(() => {
     axios
       .get("http://a50b-175-119-149-98.ngrok.io/log/" + props.state.id)
@@ -30,7 +31,7 @@ function ErrorLogModal(props) {
     <>
       <React.Fragment>
         <button className="btn btn-color" onClick={openModal}>
-          보기
+          lookup
         </button>
         <ErrorModal
           open={modalOpen}

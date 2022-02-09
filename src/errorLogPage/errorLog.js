@@ -9,6 +9,7 @@ import Tbody from "./tbody";
 export default function ErrorLog() {
   const [errors, setErrors] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState("");
+
   useEffect(() => {
     axios
       .get(
@@ -23,7 +24,7 @@ export default function ErrorLog() {
   return (
     <>
       <div className="content-wrap">
-        <div className="content">
+        <div>
           <div className="content-main">
             <ContentTitle title="Error Log"></ContentTitle>
             <SearchForm
@@ -33,12 +34,12 @@ export default function ErrorLog() {
 
             {/* <input className="ml-1000"></input> */}
 
-            <div className="left-frame">
-              <div className="form-frame frame1">
+            <div className="main-frame">
+              <div className="form-frame">
                 <div className="form-groups">
                   <label>목록</label>
                   <table>
-                    <Thead></Thead>
+                    <Thead />
                     {errors.map((error) => (
                       <Tbody
                         key={error._id}
@@ -55,9 +56,6 @@ export default function ErrorLog() {
             </div>
           </div>
         </div>
-      </div>
-      <div>
-        <ul></ul>
       </div>
     </>
   );
