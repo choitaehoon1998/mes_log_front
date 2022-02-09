@@ -151,6 +151,7 @@
 /* 테이블 스타일  */
 .form-groups table {
   width: 100%;
+  margin-bottom: 20px;
 }
 .form-groups thead {
   border-bottom: 1px solid #daddd8;
