@@ -14,8 +14,8 @@ export default function ErrorLog() {
   const [searchKeyword, setSearchKeyword] = useState("");
 
   
-  useEffect(async() => {
-      await axios
+  useEffect(() => {
+      axios
         .get("http://a50b-175-119-149-98.ngrok.io/log", {
           params: { size: 10, page: page, companyCode: searchKeyword },
       })
@@ -52,6 +52,16 @@ export default function ErrorLog() {
         });
     }
   };
+  const onFirst = () => {
+      axios
+        .get("http://a50b-175-119-149-98.ngrok.io/log", {
+          params: { size: 10, page: 0, companyCode: searchKeyword },
+        })
+        .then((response) => {
+          setErrors(response.data.content);
+          setPage(0);
+        });
+    };
 
   return (
     <>
@@ -86,6 +96,9 @@ export default function ErrorLog() {
                 &nbsp;{page + 1} / {total + 1}&nbsp;
                 <button onClick={onNext} className="btn-2 btn-color-2">
                   다음
+                </button>
+                <button onClick={onFirst} className="btn-2 btn-color-2">
+                  1페이지
                 </button>
               </div>
             </div>
