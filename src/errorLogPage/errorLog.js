@@ -13,17 +13,19 @@ export default function ErrorLog() {
   const [searchKeyword, setSearchKeyword] = useState("");
 
   useEffect(() => {
-    axios
-      .get("http://a50b-175-119-149-98.ngrok.io/log", {
-        params: { size: 10, page: page, companyCode: searchKeyword },
+      axios
+        .get("http://a50b-175-119-149-98.ngrok.io/log", {
+          params: { size: 10, page: page, companyCode: searchKeyword },
       })
       .then((response) => {
         setTotal(Math.ceil(response.data.totalElements / 10) - 1);
         setErrors(response.data.content);
         console.log(response.data.content);
+        
       })
       .catch((err) => console.log(err));
   }, [searchKeyword]);
+    
 
   const onPrev = () => {
     if (!(page === 0)) {
@@ -59,8 +61,6 @@ export default function ErrorLog() {
             title={"회사코드"}
             onchangeFunction={setSearchKeyword}
           ></SearchForm>
-
-          {/* <input className="ml-1000"></input> */}
 
           <div className="main-frame">
             <div className="form-frame">
