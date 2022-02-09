@@ -24,7 +24,7 @@ export default function ErrorLog() {
   }, []);
 
   const onPrev=()=>{
-    if(!(page === 0) ){
+    if(!(page === 0)){
       setPage(page>0 ? page-1 : page )
       axios.get('http://a50b-175-119-149-98.ngrok.io/log',{
        params: {size: 10, page: (page-1)}
