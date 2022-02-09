@@ -7,27 +7,49 @@ import Tbody from "./tbody";
 
 export default function ErrorLog() {
   const [errors, setErrors] = useState([]);
-  const [total, setTotal] = useState(1);
-
-  const error = errors.length;
-
-  const pageNumbers=[];
-  for(let i=1; i<=Math.ceil(total / error); i++){
-    pageNumbers.push(i);
-  } 
-//웹페이지 표시 도중 문데 발생
+  const [page, setPage] = useState(0);
+  const [total, setTotal] = useState(0);
+  
+  
   useEffect(() => {
-    axios
-      .get("http://3465-175-119-149-98.ngrok.io/log?size=10&page=1")
-      //   .get("http://localhost:8081/log")
-      .then((response) => {
-        console.log(errors.length)
-        console.log(response.data.totalElements)
-        setTotal(response.data.totalElements)
-        setErrors(response.data.content);
+     axios.get('http://a50b-175-119-149-98.ngrok.io/log',{
+      params: {size: 10, page: (page)}
       })
-      .catch((err) => console.log(err));
+      // .get("http://localhost:8081/log")
+      .then((response) => {
+        setTotal(Math.ceil(response.data.totalElements/10)-1 );
+        setErrors(response.data.content);
+        console.log("total",total)
+      })
+      .catch((err) => console.log(err)); 
   }, []);
+
+  const onPrev=()=>{
+    if(!(page === 0) ){
+      setPage(page>0 ? page-1 : page )
+      axios.get('http://a50b-175-119-149-98.ngrok.io/log',{
+       params: {size: 10, page: (page-1)}
+       })
+       .then((response) => {
+         setErrors(response.data.content);
+       })
+    } 
+  }
+  const onNext=()=>{
+     if(!(page === total)){
+      setPage((page<total) ? page+1 : total )
+      axios.get('http://a50b-175-119-149-98.ngrok.io/log',{
+       params: {size: 10, page: (page+1)}
+       })
+       .then((response) => {
+         setErrors(response.data.content);
+       })
+     }
+  }
+const log = () => {
+  console.log(total)
+  console.log(page)
+}
 
   return (
     <>
@@ -47,16 +69,14 @@ export default function ErrorLog() {
                   <table>
                     <Thead></Thead>
                     <Tbody props={errors} />
-
-
+                    <button onClick={onPrev} >이전</button>
+                    &nbsp;{page+1} / {total+1}&nbsp;
+                    <button onClick={onNext} >다음</button>
+                    <button onClick={log}>log</button>
                   </table>
-                  <div text="to"></div>
                 </div>
               </div>
             </div>
-
-            
-
           </div>
         </div>
       </div>
