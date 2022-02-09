@@ -13,6 +13,18 @@ export default function ErrorLog() {
   const [searchKeyword, setSearchKeyword] = useState("");
 
   useEffect(() => {
+     axios.get('http://a50b-175-119-149-98.ngrok.io/log',{
+      params: {size: 10, page: (page)}
+      })
+      .then((response) => {
+        setTotal(Math.ceil(response.data.totalElements/10)-1 );
+        setErrors(response.data.content);
+        console.log("total",total)
+      })
+      .catch((err) => console.log(err)); 
+  }, []);
+  
+  useEffect(() => {
     axios
       .get(
         "http://a50b-175-119-149-98.ngrok.io/log?companyCode=" + searchKeyword
@@ -24,17 +36,7 @@ export default function ErrorLog() {
       .catch((err) => console.log(err));
   }, [searchKeyword]);
   
-  useEffect(() => {
-     axios.get('http://a50b-175-119-149-98.ngrok.io/log',{
-      params: {size: 10, page: (page)}
-      })
-      .then((response) => {
-        setTotal(Math.ceil(response.data.totalElements/10)-1 );
-        setErrors(response.data.content);
-        console.log("total",total)
-      })
-      .catch((err) => console.log(err)); 
-  }, []);
+  
 
   const onPrev=()=>{
     if(!(page === 0)){
