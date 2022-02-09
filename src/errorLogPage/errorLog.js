@@ -3,7 +3,8 @@ import ReactDOM from "react-dom";
 import "./errorLog.css";
 import ContentTitle from "../content/ContentTitel";
 import ErrorModal from "../component/errormodalpop";
-import NameInput from "../component/nameinput"
+import NameInput from "../component/nameinput";
+import TextArea from "../component/textarea";
 
 function ErrorLog() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -14,8 +15,6 @@ function ErrorLog() {
   const closeModal = () => {
     setModalOpen(false);
   };
-  
-
 
   return (
     <>
@@ -25,19 +24,32 @@ function ErrorLog() {
             <ContentTitle title="Error Log"></ContentTitle>
             <div className="left-frame">
               <React.Fragment>
-                <button className="btn btn-color" onClick={openModal}>모달팝업</button>
+                <button className="btn btn-color" onClick={openModal}>
+                  모달팝업
+                </button>
                 <ErrorModal
                   open={modalOpen}
                   close={closeModal}
                   header="Error Popup"
                   main={
                     <div>
-                      <label>이름</label>
-                      <NameInput />
+                      <div className="t1">
+                        <label>이름</label>
+                        <NameInput />
+                        <label>내용</label>
+                        <NameInput />
+                      </div>
+                      <div className="m1">
+                        <label>날짜</label>
+                        <NameInput />
+                      </div>
+                      <div className="b1">
+                        <label>비고</label>
+                        <TextArea />
+                      </div>
                     </div>
                   }
-                >
-                </ErrorModal>
+                ></ErrorModal>
               </React.Fragment>
             </div>
           </div>

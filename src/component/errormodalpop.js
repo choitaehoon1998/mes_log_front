@@ -1,5 +1,6 @@
 import React from "react";
 import "./errorstlye/errormodalst.css";
+import SmmitBnt from "./smmitbnt";
 
 const ErrorModal = (props) => {
   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
@@ -19,9 +20,10 @@ const ErrorModal = (props) => {
           </header>
           <main>{props.main}</main>
           <footer>
+            <SmmitBnt name="보내기" />
             <button className="close" onClick={close}>
               {" "}
-              close{" "}
+              닫기{" "}
             </button>
           </footer>
         </section>

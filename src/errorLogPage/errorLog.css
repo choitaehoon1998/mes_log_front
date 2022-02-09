@@ -1,6 +1,6 @@
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
-.mgb-5{
+.mgb-5 {
   margin-bottom: 5px;
 }
 /* content */
@@ -36,7 +36,6 @@
   margin-bottom: 20px;
 }
 
-
 .notosanskr * {
   font-family: "Noto Sans KR", sans-serif;
 }
@@ -53,7 +52,6 @@
 }
 .form-frame1 > form > label {
   font-weight: bold;
-
 }
 
 .form-groups {
@@ -63,7 +61,7 @@
   width: 100%;
 }
 
-.form-groups p{
+.form-groups p {
   color: rgb(100, 100, 100);
   font-size: 14px;
   margin-bottom: 5px;
@@ -74,7 +72,6 @@
   margin-bottom: 10px;
   font-weight: normal;
 }
-
 
 .form-control {
   border-radius: 0.1rem;
@@ -101,7 +98,7 @@
   border: none;
 }
 
-.btn{
+.btn {
   border-radius: 50px;
   outline: initial !important;
   box-shadow: none !important;
@@ -120,4 +117,22 @@
   line-height: 30px;
   background-color: #fff;
   margin-left: 10px;
+}
+
+/* 텍스트에리어 */
+.textsize {
+  width: 90%;
+  height: 50px;
+  resize: none;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+.t1,
+.m1 {
+  margin-bottom: 20px;
+}
+
+.t1 label:last-of-type {
+  margin-left: 22px;
 }
