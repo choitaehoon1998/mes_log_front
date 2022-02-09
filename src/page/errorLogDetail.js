@@ -8,7 +8,7 @@ export default function ErrorLogDetail() {
 
   useEffect(() => {
     axios
-      .get("http://6bcb-175-119-149-98.ngrok.io/log/" + location.state.id)
+      .get("http://a50b-175-119-149-98.ngrok.io/log/" + location.state.id)
       .then((response) => {
         setDetailInfo(response.data);
         console.log(detailInfo);

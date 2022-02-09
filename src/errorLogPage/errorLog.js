@@ -12,7 +12,7 @@ export default function ErrorLog() {
   useEffect(() => {
     axios
       .get(
-        "http://6bcb-175-119-149-98.ngrok.io/log?companyCode=" + searchKeyword
+        "http://a50b-175-119-149-98.ngrok.io/log?companyCode=" + searchKeyword
       )
       .then((response) => {
         setErrors(response.data.content);
