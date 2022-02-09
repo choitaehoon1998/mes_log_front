@@ -8,6 +8,8 @@ import Tbody from "./tbody";
 
 export default function ErrorLog() {
   const [errors, setErrors] = useState([]);
+  const [page, setPage] = useState(0);
+  const [total, setTotal] = useState(0);
   const [searchKeyword, setSearchKeyword] = useState("");
 
   useEffect(() => {
@@ -21,6 +23,41 @@ export default function ErrorLog() {
       })
       .catch((err) => console.log(err));
   }, [searchKeyword]);
+  
+  useEffect(() => {
+     axios.get('http://a50b-175-119-149-98.ngrok.io/log',{
+      params: {size: 10, page: (page)}
+      })
+      .then((response) => {
+        setTotal(Math.ceil(response.data.totalElements/10)-1 );
+        setErrors(response.data.content);
+        console.log("total",total)
+      })
+      .catch((err) => console.log(err)); 
+  }, []);
+
+  const onPrev=()=>{
+    if(!(page === 0)){
+      setPage(page>0 ? page-1 : page )
+      axios.get('http://a50b-175-119-149-98.ngrok.io/log',{
+       params: {size: 10, page: (page-1)}
+       })
+       .then((response) => {
+         setErrors(response.data.content);
+       })
+    } 
+  }
+  const onNext=()=>{
+     if(!(page === total)){
+      setPage((page<total) ? page+1 : total )
+      axios.get('http://a50b-175-119-149-98.ngrok.io/log',{
+       params: {size: 10, page: (page+1)}
+       })
+       .then((response) => {
+         setErrors(response.data.content);
+       })
+     }
+  }
 
   return (
     <>
@@ -51,7 +88,13 @@ export default function ErrorLog() {
                       link={error._id}
                     ></Tbody>
                   ))}
+
+                    <button onClick={onPrev} >이전</button>
+                    &nbsp;{page+1} / {total+1}&nbsp;
+                    <button onClick={onNext} >다음</button>
+
                 </table>
+
               </div>
             </div>
           </div>
