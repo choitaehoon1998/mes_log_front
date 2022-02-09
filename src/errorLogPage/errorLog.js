@@ -6,6 +6,7 @@ import ContentTitle from "../content/ContentTitel";
 import SearchForm from "../components/SearchForm";
 import Thead from "./thead";
 import Tbody from "./tbody";
+import { API_URL } from "../constant/constant";
 
 export default function ErrorLog() {
   const [errors, setErrors] = useState([]);
@@ -13,11 +14,10 @@ export default function ErrorLog() {
   const [total, setTotal] = useState(0);
   const [searchKeyword, setSearchKeyword] = useState("");
 
-  
   useEffect(() => {
-      axios
-        .get("http://a50b-175-119-149-98.ngrok.io/log", {
-          params: { size: 10, page: page, companyCode: searchKeyword },
+    axios
+      .get(API_URL + "/log", {
+        params: { size: 10, page: page, companyCode: searchKeyword },
       })
       .then((response) => {
         setTotal(Math.ceil(response.data.totalElements / 10) - 1);
@@ -26,13 +26,12 @@ export default function ErrorLog() {
       })
       .catch((err) => console.log(err));
   }, [searchKeyword]);
-    
 
   const onPrev = () => {
     if (!(page === 0)) {
       setPage(page > 0 ? page - 1 : page);
       axios
-        .get("http://a50b-175-119-149-98.ngrok.io/log", {
+        .get(API_URL + "/log", {
           params: { size: 10, page: page - 1, companyCode: searchKeyword },
         })
         .then((response) => {
@@ -44,7 +43,7 @@ export default function ErrorLog() {
     if (!(page === total)) {
       setPage(page < total ? page + 1 : total);
       axios
-        .get("http://a50b-175-119-149-98.ngrok.io/log", {
+        .get(API_URL + "/log", {
           params: { size: 10, page: page + 1, companyCode: searchKeyword },
         })
         .then((response) => {
@@ -53,15 +52,15 @@ export default function ErrorLog() {
     }
   };
   const onFirst = () => {
-      axios
-        .get("http://a50b-175-119-149-98.ngrok.io/log", {
-          params: { size: 10, page: 0, companyCode: searchKeyword },
-        })
-        .then((response) => {
-          setErrors(response.data.content);
-          setPage(0);
-        });
-    };
+    axios
+      .get(API_URL + "/log", {
+        params: { size: 10, page: 0, companyCode: searchKeyword },
+      })
+      .then((response) => {
+        setErrors(response.data.content);
+        setPage(0);
+      });
+  };
 
   return (
     <>

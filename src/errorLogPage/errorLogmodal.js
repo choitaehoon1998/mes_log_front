@@ -3,7 +3,7 @@ import axios from "axios";
 import ErrorModal from "../component/errormodalpop";
 import ErrorInput from "../component/errorinput";
 import TextArea from "../component/textarea";
-
+import { API_URL } from "../constant/constant";
 function ErrorLogModal(props) {
   const [modalOpen, setModalOpen] = useState(false); //모달오픈
   const [detailInfo, setDetailInfo] = useState([]); //axios 로그조회
@@ -11,7 +11,7 @@ function ErrorLogModal(props) {
   // 모달 열고 닫기할때 로그 불러오기
   const openModal = async () => {
     await axios
-      .get("http://a50b-175-119-149-98.ngrok.io/log/" + props.state.id)
+      .get(API_URL + "/log/" + props.state.id)
       .then((response) => {
         setDetailInfo(response.data);
       })
