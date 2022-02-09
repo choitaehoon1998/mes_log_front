@@ -14,35 +14,23 @@ export default function ErrorLog() {
 
   useEffect(() => {
     axios
-      .get(
-        "http://a50b-175-119-149-98.ngrok.io/log?companyCode=" + searchKeyword
-      )
+      .get("http://a50b-175-119-149-98.ngrok.io/log", {
+        params: { size: 10, page: page, companyCode: searchKeyword },
+      })
       .then((response) => {
+        setTotal(Math.ceil(response.data.totalElements / 10) - 1);
         setErrors(response.data.content);
         console.log(response.data.content);
       })
       .catch((err) => console.log(err));
   }, [searchKeyword]);
 
-  useEffect(() => {
-    axios
-      .get("http://a50b-175-119-149-98.ngrok.io/log", {
-        params: { size: 10, page: page },
-      })
-      .then((response) => {
-        setTotal(Math.ceil(response.data.totalElements / 10) - 1);
-        setErrors(response.data.content);
-        console.log("total", total);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
   const onPrev = () => {
     if (!(page === 0)) {
       setPage(page > 0 ? page - 1 : page);
       axios
         .get("http://a50b-175-119-149-98.ngrok.io/log", {
-          params: { size: 10, page: page - 1 },
+          params: { size: 10, page: page - 1, companyCode: searchKeyword },
         })
         .then((response) => {
           setErrors(response.data.content);
@@ -54,7 +42,7 @@ export default function ErrorLog() {
       setPage(page < total ? page + 1 : total);
       axios
         .get("http://a50b-175-119-149-98.ngrok.io/log", {
-          params: { size: 10, page: page + 1 },
+          params: { size: 10, page: page + 1, companyCode: searchKeyword },
         })
         .then((response) => {
           setErrors(response.data.content);
