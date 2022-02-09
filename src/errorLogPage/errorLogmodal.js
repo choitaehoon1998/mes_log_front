@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
-import "./errorLog.css";
+import "./errorLogmodal.css";
 import ContentTitle from "../content/ContentTitel";
 import ErrorModal from "../component/errormodalpop";
 import NameInput from "../component/nameinput";
 import TextArea from "../component/textarea";
 
-function ErrorLog() {
+function ErrorLogModal() {
   const [modalOpen, setModalOpen] = useState(false);
 
   const openModal = () => {
@@ -59,4 +58,4 @@ function ErrorLog() {
   );
 }
 
-export default ErrorLog;
+export default ErrorLogModal;

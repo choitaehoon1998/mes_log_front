@@ -1,6 +1,6 @@
 import "./App.css";
 import "./reset.css";
-import ErrorLog from "./errorLogPage/errorLog";
+import ErrorLogModal from "./errorLogPage/errorLogmodal";
 import Router from "./routes";
 import React from "react";
 import Context from "./Context";
@@ -9,7 +9,7 @@ export default function App() {
   return (
     <>
       <Context>
-        <ErrorLog />
+        <ErrorLogModal />
         <Router />
       </Context>
     </>
