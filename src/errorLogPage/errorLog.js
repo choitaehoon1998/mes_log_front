@@ -9,6 +9,7 @@ import Tbody from "./tbody";
 export default function ErrorLog() {
   const [errors, setErrors] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState("");
+
   useEffect(() => {
     axios
       .get(
@@ -20,44 +21,41 @@ export default function ErrorLog() {
       })
       .catch((err) => console.log(err));
   }, [searchKeyword]);
+
   return (
     <>
       <div className="content-wrap">
-        <div className="content">
-          <div className="content-main">
-            <ContentTitle title="Error Log"></ContentTitle>
-            <SearchForm
-              title={"회사코드"}
-              onchangeFunction={setSearchKeyword}
-            ></SearchForm>
+        <div className="content-main">
+          <ContentTitle title="Error Log"></ContentTitle>
+          <SearchForm
+            title={"회사코드"}
+            onchangeFunction={setSearchKeyword}
+          ></SearchForm>
 
-            {/* <input className="ml-1000"></input> */}
+          {/* <input className="ml-1000"></input> */}
 
-            <div className="left-frame">
-              <div className="form-frame frame1">
-                <div className="form-groups">
-                  <label>목록</label>
-                  <table>
-                    <Thead></Thead>
-                    {errors.map((error) => (
-                      <Tbody
-                        key={error._id}
-                        companyCode={error.companyCode}
-                        name={error.userName}
-                        date={error.sendDateTime.substring(0, 10)}
-                        time={error.sendDateTime.substring(11, 19)}
-                        link={error._id}
-                      ></Tbody>
-                    ))}
-                  </table>
-                </div>
+          <div className="main-frame">
+            <div className="form-frame">
+              <div className="form-groups">
+                <label>목록</label>
+                <table>
+                  <Thead />
+
+                  {errors.map((error) => (
+                    <Tbody
+                      key={error._id}
+                      companyCode={error.companyCode}
+                      name={error.userName}
+                      date={error.sendDateTime.substring(0, 10)}
+                      time={error.sendDateTime.substring(11, 19)}
+                      link={error._id}
+                    ></Tbody>
+                  ))}
+                </table>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div>
-        <ul></ul>
       </div>
     </>
   );

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import axios from "axios";
 import "./css/page.css";
+
 export default function ErrorLogDetail() {
   const [detailInfo, setDetailInfo] = useState([]);
   const location = useLocation();
@@ -15,6 +16,7 @@ export default function ErrorLogDetail() {
       })
       .catch((err) => console.log(err));
   }, [location.state.id]);
+
   return (
     <div className="content-wrap">
       <div className="content">
