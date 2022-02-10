@@ -17,7 +17,7 @@ export default function ErrorLog() {
   const [errors, setErrors] = useState([]);
   const [page, setPage] = useState(0);
   const [total, setTotal] = useState(0);
-  const [total, setTotal] = useState(0);
+  const [totalPage, setTotalPage] = useState(0);
   const [searchKeyword, setSearchKeyword] = useState({
     companyCode: "",
     userName: "",
@@ -49,7 +49,7 @@ export default function ErrorLog() {
       })
       .then((response) => {
         setTotal(Math.ceil(response.data.totalElements));
-        setTotalPages(Math.ceil(response.data.totalPages));
+        setTotalPage(Math.ceil(response.data.totalPages));
         setErrors(response.data.content);
       })
       .then(() => {
@@ -141,7 +141,7 @@ export default function ErrorLog() {
                   ))}
                 </table>
 
-                <Paging page={page} total={total} setPage={setPage} totalPages={totalPages} />
+                <Paging page={page} total={total} setPage={setPage} totalPage={totalPage} />
               </div>
             </div>
           </div>
