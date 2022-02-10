@@ -130,7 +130,15 @@
   outline: none;
   border: none;
 }
-
+.btn-p::before{
+  content: "<";
+}
+.btn-f::before{
+  content: "<";
+}
+.btn-n::before{
+  content: ">";
+}
 .btn-2 {
   border-radius: 200px;
   outline: initial !important;
