@@ -5,7 +5,9 @@ import "./css/componentstyle.css";
 import "./css/date.css";
 
 const DateRange = (props) => {
-  const [startDate, setStartDate] = useState(new Date());
+  let fromDate = new Date();
+  fromDate.setMonth(fromDate.getMonth() - 1);
+  const [startDate, setStartDate] = useState(fromDate);
   const [endDate, setEndDate] = useState(new Date());
   return (
     <>

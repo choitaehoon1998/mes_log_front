@@ -9,6 +9,9 @@ import Tbody from "./tbody";
 import { API_URL } from "../constant/constant";
 import DateRange from "../components/daterange";
 export default function ErrorLog() {
+  let startDate = new Date();
+
+  startDate.setMonth(startDate.getMonth() - 1);
   const [errors, setErrors] = useState([]);
   const [page, setPage] = useState(0);
   const [total, setTotal] = useState(0);
@@ -20,7 +23,7 @@ export default function ErrorLog() {
     methodType: "",
     requestUri: "",
     remoteHost: "",
-    startDate: new Date().toISOString().substring(0, 10),
+    startDate: startDate.toISOString().substring(0, 10),
     endDate: new Date().toISOString().substring(0, 10),
   });
 
@@ -47,7 +50,7 @@ export default function ErrorLog() {
         setErrors(response.data.content);
       })
       .catch((err) => console.log(err));
-  }, [searchKeyword]);
+  }, [searchKeyword, page]);
 
   const onPrev = () => {
     if (!(page === 0)) {
