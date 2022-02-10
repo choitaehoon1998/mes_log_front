@@ -7,22 +7,44 @@ import SearchForm from "../components/SearchForm";
 import Thead from "./thead";
 import Tbody from "./tbody";
 import { API_URL } from "../constant/constant";
-
+import DateRange from "../components/daterange";
 export default function ErrorLog() {
   const [errors, setErrors] = useState([]);
   const [page, setPage] = useState(0);
   const [total, setTotal] = useState(0);
-  const [searchKeyword, setSearchKeyword] = useState("");
+  const [searchKeyword, setSearchKeyword] = useState({
+    companyCode: "",
+    userName: "",
+    exceptionClass: "",
+    exceptionMessage: "",
+    methodType: "",
+    requestUri: "",
+    remoteHost: "",
+    startDate: new Date().toISOString().substring(0, 10),
+    endDate: new Date().toISOString().substring(0, 10),
+  });
 
   useEffect(() => {
+    console.log(searchKeyword);
     axios
       .get(API_URL + "/log", {
-        params: { size: 10, page: page, companyCode: searchKeyword },
+        params: {
+          size: 10,
+          page: page,
+          companyCode: searchKeyword.companyCode,
+          userName: searchKeyword.userName,
+          exceptionClass: searchKeyword.exceptionClass,
+          exceptionMessage: searchKeyword.exceptionMessage,
+          method: searchKeyword.methodType,
+          requestUri: searchKeyword.requestUri,
+          remoteHost: searchKeyword.remoteHost,
+          startDate: searchKeyword.startDate,
+          endDate: searchKeyword.endDate,
+        },
       })
       .then((response) => {
         setTotal(Math.ceil(response.data.totalElements / 10) - 1);
         setErrors(response.data.content);
-        console.log(response.data.content);
       })
       .catch((err) => console.log(err));
   }, [searchKeyword]);
@@ -32,7 +54,7 @@ export default function ErrorLog() {
       setPage(page > 0 ? page - 1 : page);
       axios
         .get(API_URL + "/log", {
-          params: { size: 10, page: page - 1, companyCode: searchKeyword },
+          params: { size: 10, page: page - 1 },
         })
         .then((response) => {
           setErrors(response.data.content);
@@ -44,7 +66,7 @@ export default function ErrorLog() {
       setPage(page < total ? page + 1 : total);
       axios
         .get(API_URL + "/log", {
-          params: { size: 10, page: page + 1, companyCode: searchKeyword },
+          params: { size: 10, page: page + 1 },
         })
         .then((response) => {
           setErrors(response.data.content);
@@ -54,7 +76,7 @@ export default function ErrorLog() {
   const onFirst = () => {
     axios
       .get(API_URL + "/log", {
-        params: { size: 10, page: 0, companyCode: searchKeyword },
+        params: { size: 10, page: 0 },
       })
       .then((response) => {
         setErrors(response.data.content);
@@ -68,10 +90,52 @@ export default function ErrorLog() {
         <div className="content-main">
           <ContentTitle title="Error Log"></ContentTitle>
           <SearchForm
-            title={"회사코드"}
-            onchangeFunction={setSearchKeyword}
+            title={"회사 코드"}
+            onchangeFunction={(value) => {
+              setSearchKeyword({ ...searchKeyword, companyCode: value });
+            }}
           ></SearchForm>
-
+          <SearchForm
+            title={"유저 명"}
+            onchangeFunction={(value) => {
+              setSearchKeyword({ ...searchKeyword, userName: value });
+            }}
+          ></SearchForm>
+          <SearchForm
+            title={"예외 클래스"}
+            onchangeFunction={(value) => {
+              setSearchKeyword({ ...searchKeyword, exceptionClass: value });
+            }}
+          ></SearchForm>
+          <SearchForm
+            title={"예외 메세지"}
+            onchangeFunction={(value) => {
+              setSearchKeyword({ ...searchKeyword, exceptionMessage: value });
+            }}
+          ></SearchForm>
+          <SearchForm
+            title={"원격 호스트"}
+            onchangeFunction={(value) => {
+              setSearchKeyword({ ...searchKeyword, remoteHost: value });
+            }}
+          ></SearchForm>
+          <SearchForm
+            title={"요청 URL"}
+            onchangeFunction={(value) => {
+              setSearchKeyword({ ...searchKeyword, requestUri: value });
+            }}
+          ></SearchForm>
+          <SearchForm
+            title={"메소드 종류"}
+            onchangeFunction={(value) => {
+              setSearchKeyword({ ...searchKeyword, methodType: value });
+            }}
+          ></SearchForm>
+          <DateRange
+            onchangeFunction={(name, value) => {
+              setSearchKeyword({ ...searchKeyword, [name]: value });
+            }}
+          ></DateRange>
           <div className="main-frame">
             <div className="form-frame">
               <div className="form-groups">
