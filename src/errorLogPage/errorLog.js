@@ -25,42 +25,24 @@ export default function ErrorLog() {
         console.log(response.data.content);
       })
       .catch((err) => console.log(err));
-  }, [searchKeyword]);
+  }, [searchKeyword, page]);
 
-  const onPrev = () => {
-    if (!(page === 0)) {
-      setPage(page > 0 ? page - 1 : page);
-      axios
-        .get(API_URL + "/log", {
-          params: { size: 10, page: page - 1, companyCode: searchKeyword },
-        })
-        .then((response) => {
-          setErrors(response.data.content);
-        });
-    }
-  };
-  const onNext = () => {
-    if (!(page === total)) {
-      setPage(page < total ? page + 1 : total);
-      axios
-        .get(API_URL + "/log", {
-          params: { size: 10, page: page + 1, companyCode: searchKeyword },
-        })
-        .then((response) => {
-          setErrors(response.data.content);
-        });
-    }
-  };
-  const onFirst = () => {
-    axios
-      .get(API_URL + "/log", {
-        params: { size: 10, page: 0, companyCode: searchKeyword },
-      })
-      .then((response) => {
-        setErrors(response.data.content);
-        setPage(0);
-      });
-  };
+
+const PageNum = () => {
+  const num = []
+  for(let i = 0; i <= total; i++ ){
+    num.push(i);
+  }  
+  return(
+    <>
+      {num.map(n => 
+      <button onClick={() => setPage(n)} >
+        {n+1}
+      </button>
+      )}
+    </>
+  );
+}
 
   return (
     <>
@@ -89,16 +71,9 @@ export default function ErrorLog() {
                     ></Tbody>
                   ))}
                 </table>
-                <button onClick={onPrev} className="btn-2 btn-color-2">
-                  이전
-                </button>
-                &nbsp;{page + 1} / {total + 1}&nbsp;
-                <button onClick={onNext} className="btn-2 btn-color-2">
-                  다음
-                </button>
-                <button onClick={onFirst} className="btn-2 btn-color-2">
-                  1페이지
-                </button>
+
+                <PageNum></PageNum>
+
               </div>
             </div>
           </div>
