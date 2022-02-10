@@ -7,46 +7,76 @@ import SearchForm from "../components/SearchForm";
 import Thead from "./thead";
 import Tbody from "./tbody";
 import { API_URL } from "../constant/constant";
-
+import DateRange from "../components/daterange";
 export default function ErrorLog() {
+  let startDate = new Date();
+
+  startDate.setMonth(startDate.getMonth() - 1);
   const [errors, setErrors] = useState([]);
   const [page, setPage] = useState(0);
   const [total, setTotal] = useState(0);
-  const [searchKeyword, setSearchKeyword] = useState("");
+  const [searchKeyword, setSearchKeyword] = useState({
+    companyCode: "",
+    userName: "",
+    exceptionClass: "",
+    exceptionMessage: "",
+    methodType: "",
+    requestUri: "",
+    remoteHost: "",
+    startDate: startDate.toISOString().substring(0, 10),
+    endDate: new Date().toISOString().substring(0, 10),
+  });
 
   useEffect(() => {
     axios
       .get(API_URL + "/log", {
-        params: { size: (total/10), page: page, companyCode: searchKeyword },
+
+        params: {
+          size: 10,
+          page: page,
+          companyCode: searchKeyword.companyCode,
+          userName: searchKeyword.userName,
+          exceptionClass: searchKeyword.exceptionClass,
+          exceptionMessage: searchKeyword.exceptionMessage,
+          method: searchKeyword.methodType,
+          requestUri: searchKeyword.requestUri,
+          remoteHost: searchKeyword.remoteHost,
+          startDate: searchKeyword.startDate,
+          endDate: searchKeyword.endDate,
+        },
       })
       .then((response) => {
         setTotal(Math.ceil(response.data.totalElements));
         setErrors(response.data.content);
-        console.log(response.data.content);
       })
-      .catch((err) => console.log(err));
-      if(!(searchKeyword==="")){
-        setPage(0);
-      }
-  }, [searchKeyword, page]);
+      .then(() => {
+        if (page > total) {
+          setPage(total);
+        }
+      })
+      .catch();
+  }, [searchKeyword, page, total]);
 
 
-const Paging = () => {
-  const num = []
-
-  for(let i = 0; i < 10; i++ ){
-    num.push(i);
-  }
-  return(
-    <>
-      {num.map(n => 
-      <button key={n} onClick={() => setPage(n) } className={"btn-2 btn-color-2"} >
-        {n+1}
-      </button>
-      )}
-    </>
-  );
-}
+  const Paging = () => {
+    const num = [];
+    for (let i = 0; i <= total; i++) {
+      num.push(i);
+    }
+    return (
+      <>
+        {num.map((n) => (
+          <button
+            key={n}
+            onClick={() => setPage(n)}
+            className="btn-2 btn-color-2"
+          >
+            {n + 1}
+          </button>
+        ))}
+      </>
+    );
+  };
 
   return (
     <>
@@ -54,10 +84,52 @@ const Paging = () => {
         <div className="content-main">
           <ContentTitle title="Error Log"></ContentTitle>
           <SearchForm
-            title={"회사코드"}
-            onchangeFunction={setSearchKeyword}
+            title={"회사 코드"}
+            onchangeFunction={(value) => {
+              setSearchKeyword({ ...searchKeyword, companyCode: value });
+            }}
           ></SearchForm>
-
+          <SearchForm
+            title={"유저 명"}
+            onchangeFunction={(value) => {
+              setSearchKeyword({ ...searchKeyword, userName: value });
+            }}
+          ></SearchForm>
+          <SearchForm
+            title={"예외 클래스"}
+            onchangeFunction={(value) => {
+              setSearchKeyword({ ...searchKeyword, exceptionClass: value });
+            }}
+          ></SearchForm>
+          <SearchForm
+            title={"예외 메세지"}
+            onchangeFunction={(value) => {
+              setSearchKeyword({ ...searchKeyword, exceptionMessage: value });
+            }}
+          ></SearchForm>
+          <SearchForm
+            title={"원격 호스트"}
+            onchangeFunction={(value) => {
+              setSearchKeyword({ ...searchKeyword, remoteHost: value });
+            }}
+          ></SearchForm>
+          <SearchForm
+            title={"요청 URL"}
+            onchangeFunction={(value) => {
+              setSearchKeyword({ ...searchKeyword, requestUri: value });
+            }}
+          ></SearchForm>
+          <SearchForm
+            title={"메소드 종류"}
+            onchangeFunction={(value) => {
+              setSearchKeyword({ ...searchKeyword, methodType: value });
+            }}
+          ></SearchForm>
+          <DateRange
+            onchangeFunction={(name, value) => {
+              setSearchKeyword({ ...searchKeyword, [name]: value });
+            }}
+          ></DateRange>
           <div className="main-frame">
             <div className="form-frame">
               <div className="form-groups">
@@ -76,8 +148,7 @@ const Paging = () => {
                   ))}
                 </table>
 
-                <Paging/>
-
+                <Paging />
               </div>
             </div>
           </div>
