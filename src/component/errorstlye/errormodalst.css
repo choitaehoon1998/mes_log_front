@@ -122,6 +122,14 @@
   outline: none;
   border: none;
 }
+.btn-color-2-active {
+  transition: 0.2s;
+  background-color: #a1a1a1;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  outline: none;
+  border: none;
+}
 
 .btn-2 {
   border-radius: 200px;

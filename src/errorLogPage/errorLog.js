@@ -51,25 +51,39 @@ export default function ErrorLog() {
       })
       .then(() => {
         if (page > total) {
-          setPage(total);
+          setPage(0);
         }
       })
       .catch();
   }, [searchKeyword, page, total]);
 
 
+  const Prev = () => {
+    setPage(page-1);
+  }
+  const Next = () => {
+    setPage(page+1);
+  }
+
   const Paging = () => {
+    console.log(page)
     const num = [];
-    for (let i = 0; i <= total; i++) {
-      num.push(i);
+    if(page<10){
+      for (let i = 0; i < total/10; i++) {
+        num.push(i);
+      }
+    }else if(page>10){
+    for (let i = 0; i < 10; i++) {
+        num.push(i);
+      }
     }
     return (
       <>
         {num.map((n) => (
           <button
             key={n}
-            onClick={() => setPage(n)}
-            className="btn-2 btn-color-2"
+            onClick={() => setPage(n)  }
+            className={page === n ? "btn-2 btn-color-2-active":"btn-2 btn-color-2"}
           >
             {n + 1}
           </button>
@@ -147,8 +161,9 @@ export default function ErrorLog() {
                     ></Tbody>
                   ))}
                 </table>
-
+                {/* <button onClick={Prev} className="btn-2 btn-color-2 btn-p"></button> */}
                 <Paging />
+                {/* <button onClick={Next} className="btn-2 btn-color-2 btn-n"></button> */}
               </div>
             </div>
           </div>
