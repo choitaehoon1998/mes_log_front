@@ -10,6 +10,8 @@ const DateRange = (props) => {
   const [endDate, setEndDate] = useState(new Date());
   return (
     <>
+      <label className="date-name">{props.title}</label>
+
       <DatePicker
         selected={startDate}
         onChange={(date) => {

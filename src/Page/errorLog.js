@@ -67,7 +67,7 @@ export default function ErrorLog() {
           <ContentTitle title="Error Log"></ContentTitle>
 
           <section>
-            <div className="search-top">
+            <div className="search-group">
               <SearchForm
                 title={"회사 코드"}
                 onchangeFunction={(value) => {
@@ -101,8 +101,6 @@ export default function ErrorLog() {
                   setSearchKeyword({ ...searchKeyword, remoteHost: value });
                 }}
               ></SearchForm>
-            </div>
-            <div className="search-bottom">
               <SearchForm
                 title={"요청 URL"}
                 onchangeFunction={(value) => {
@@ -116,6 +114,7 @@ export default function ErrorLog() {
                 }}
               ></SearchForm>
               <DateRange
+                title={"날짜"}
                 onchangeFunction={(name, value) => {
                   setSearchKeyword({ ...searchKeyword, [name]: value });
                 }}

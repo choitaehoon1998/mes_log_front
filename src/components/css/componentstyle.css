@@ -5,7 +5,7 @@
 /* 데이커 스타일 */
 
 .react-datepicker__triangle {
-  transform: translate(220px, 0px) !important;
+  transform: translate(30px, 0px) !important;
   z-index: 10 !important;
 }
 
@@ -292,4 +292,16 @@ div.filepicker {
   border-width: 11px 0 0 11px;
   border-style: solid;
   border-color: white transparent transparent #920035;
+}
+
+/* datepicker */
+
+.date-name {
+  display: inline-block;
+  text-align: left;
+  width: 60px;
+  margin-left: 30px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 15px;
+  color: #222;
 }

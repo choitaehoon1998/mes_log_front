@@ -2,6 +2,7 @@ import React from "react";
 
 function ErrorInput(props) {
   const { errorData } = props;
+
   return (
     <>
       <input

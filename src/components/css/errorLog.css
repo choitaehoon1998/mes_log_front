@@ -135,30 +135,22 @@
 }
 
 /* 페이지 내의 회사 코드 검색 form 스타일 */
-.search-top,
-.search-bottom {
+.search-group {
   display: flex;
-  justify-content: first baseline;
+  flex-wrap: wrap;
 }
-
-.search-bottom {
-  margin: 30px 0;
+.form-group {
+  margin-bottom: 26px;
 }
 
 .form-group label {
-  margin: 0 20px 0 50px;
+  display: inline-block;
+  text-align: left;
+  width: 90px;
+  margin-left: 30px;
   font-family: "Noto Sans KR", sans-serif;
   font-size: 15px;
   color: #222;
-}
-.search-top form:first-child .form-group label,
-.search-bottom form:first-child .form-group label {
-  margin-left: 0;
-}
-
-.search-bottom form:nth-child(2) .form-group label {
-  margin-left: 48px;
-  margin-right: 10px;
 }
 
 .form-group input {
@@ -167,7 +159,7 @@
   border-radius: 2px;
   border: 1px solid rgb(209, 209, 209);
   outline: none;
-  border-radius: 20px;
+  border-radius: 13px;
   font-family: "Noto Sans KR", sans-serif;
   padding: 5px 20px;
 }
