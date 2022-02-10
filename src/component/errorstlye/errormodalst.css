@@ -127,11 +127,11 @@
   border-radius: 200px;
   outline: initial !important;
   box-shadow: none !important;
-  font-size: 12px;
+  font-size: 13px;
   height: 30px;
   width: 30px;
   line-height: 1;
-  margin: 0 5px 0 5px;
+  margin: 0 2px 0 2px;
   font-family: "Noto Sans KR", sans-serif;
 }
 
