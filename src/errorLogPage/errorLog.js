@@ -50,9 +50,6 @@ export default function ErrorLog() {
         setErrors(response.data.content);
       })
       .catch((err) => console.log(err));
-    if (!(searchKeyword === "")) {
-      setPage(0);
-    }
   }, [searchKeyword, page]);
 
   const Paging = () => {
