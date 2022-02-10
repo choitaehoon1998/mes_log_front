@@ -25,10 +25,11 @@ export default function ErrorLog() {
         console.log(response.data.content);
       })
       .catch((err) => console.log(err));
+      setPage(0);
   }, [searchKeyword, page]);
 
 
-const PageNum = () => {
+const Paging = () => {
   const num = []
   for(let i = 0; i <= total; i++ ){
     num.push(i);
@@ -36,7 +37,7 @@ const PageNum = () => {
   return(
     <>
       {num.map(n => 
-      <button onClick={() => setPage(n)} >
+      <button key={n} onClick={() => setPage(n)} className="" >
         {n+1}
       </button>
       )}
@@ -72,7 +73,7 @@ const PageNum = () => {
                   ))}
                 </table>
 
-                <PageNum></PageNum>
+                <Paging/>
 
               </div>
             </div>
