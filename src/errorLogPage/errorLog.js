@@ -25,7 +25,9 @@ export default function ErrorLog() {
         console.log(response.data.content);
       })
       .catch((err) => console.log(err));
-      setPage(0);
+      if(!(searchKeyword==="")){
+        setPage(0);
+      }
   }, [searchKeyword, page]);
 
 
@@ -37,7 +39,7 @@ const Paging = () => {
   return(
     <>
       {num.map(n => 
-      <button key={n} onClick={() => setPage(n)} className="" >
+      <button key={n} onClick={() => setPage(n)} className="btn-2 btn-color-2" >
         {n+1}
       </button>
       )}

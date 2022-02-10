@@ -124,21 +124,15 @@
 }
 
 .btn-2 {
-  border-radius: 8px;
+  border-radius: 200px;
   outline: initial !important;
   box-shadow: none !important;
-  font-size: 14px;
-  padding: 10px 8px;
-  height: auto;
-  width: 70px;
+  font-size: 12px;
+  height: 30px;
+  width: 30px;
   line-height: 1;
+  margin: 0 5px 0 5px;
   font-family: "Noto Sans KR", sans-serif;
-}
-.btn-2:first-of-type {
-  margin-right: 12px;
-}
-.btn-2:last-of-type {
-  margin-left: 12px;
 }
 
 /* 폼스타일 */
