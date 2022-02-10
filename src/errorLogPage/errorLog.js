@@ -17,10 +17,10 @@ export default function ErrorLog() {
   useEffect(() => {
     axios
       .get(API_URL + "/log", {
-        params: { size: 10, page: page, companyCode: searchKeyword },
+        params: { size: (total/10), page: page, companyCode: searchKeyword },
       })
       .then((response) => {
-        setTotal(Math.ceil(response.data.totalElements / 10) - 1);
+        setTotal(Math.ceil(response.data.totalElements));
         setErrors(response.data.content);
         console.log(response.data.content);
       })
@@ -33,13 +33,14 @@ export default function ErrorLog() {
 
 const Paging = () => {
   const num = []
-  for(let i = 0; i <= total; i++ ){
+
+  for(let i = 0; i < 10; i++ ){
     num.push(i);
-  }  
+  }
   return(
     <>
       {num.map(n => 
-      <button key={n} onClick={() => setPage(n)} className="btn-2 btn-color-2" >
+      <button key={n} onClick={() => setPage(n) } className={"btn-2 btn-color-2"} >
         {n+1}
       </button>
       )}
