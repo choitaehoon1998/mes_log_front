@@ -8,6 +8,8 @@ import Thead from "./thead";
 import Tbody from "./tbody";
 import { API_URL } from "../constant/constant";
 import DateRange from "../components/daterange";
+import Paging from "../components/Paging";
+
 export default function ErrorLog() {
   let startDate = new Date();
 
@@ -30,7 +32,6 @@ export default function ErrorLog() {
   useEffect(() => {
     axios
       .get(API_URL + "/log", {
-
         params: {
           size: 10,
           page: page,
@@ -56,41 +57,6 @@ export default function ErrorLog() {
       })
       .catch();
   }, [searchKeyword, page, total]);
-
-
-  const Prev = () => {
-    setPage(page-1);
-  }
-  const Next = () => {
-    setPage(page+1);
-  }
-
-  const Paging = () => {
-    console.log(page)
-    const num = [];
-    if(page<10){
-      for (let i = 0; i < total/10; i++) {
-        num.push(i);
-      }
-    }else if(page>10){
-    for (let i = 0; i < 10; i++) {
-        num.push(i);
-      }
-    }
-    return (
-      <>
-        {num.map((n) => (
-          <button
-            key={n}
-            onClick={() => setPage(n)  }
-            className={page === n ? "btn-2 btn-color-2-active":"btn-2 btn-color-2"}
-          >
-            {n + 1}
-          </button>
-        ))}
-      </>
-    );
-  };
 
   return (
     <>
@@ -161,9 +127,8 @@ export default function ErrorLog() {
                     ></Tbody>
                   ))}
                 </table>
-                {/* <button onClick={Prev} className="btn-2 btn-color-2 btn-p"></button> */}
-                <Paging />
-                {/* <button onClick={Next} className="btn-2 btn-color-2 btn-n"></button> */}
+
+                <Paging page={page} total={total} setPage={setPage} />
               </div>
             </div>
           </div>
