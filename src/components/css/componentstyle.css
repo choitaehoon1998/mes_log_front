@@ -14,7 +14,7 @@
   .react-datepicker__time-box
   ul.react-datepicker__time-list
   li.react-datepicker__time-list-item--selected {
-  background-color: rgb(185, 13, 13) !important;
+  background-color: #eb9486 !important;
 }
 .react-datepicker__header {
   background-color: rgb(255, 128, 128) !important;
