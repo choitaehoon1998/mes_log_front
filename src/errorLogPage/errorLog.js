@@ -28,7 +28,6 @@ export default function ErrorLog() {
   });
 
   useEffect(() => {
-    console.log(searchKeyword);
     axios
       .get(API_URL + "/log", {
         params: {
@@ -49,8 +48,13 @@ export default function ErrorLog() {
         setTotal(Math.ceil(response.data.totalElements / 10) - 1);
         setErrors(response.data.content);
       })
-      .catch((err) => console.log(err));
-  }, [searchKeyword, page]);
+      .then(() => {
+        if (page > total) {
+          setPage(total);
+        }
+      })
+      .catch();
+  }, [searchKeyword, page, total]);
 
   const Paging = () => {
     const num = [];

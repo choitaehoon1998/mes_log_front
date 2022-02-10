@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import ErrorModal from "../component/errormodalpop";
 import ErrorInput from "../component/errorinput";
@@ -15,7 +15,7 @@ function ErrorLogModal(props) {
       .then((response) => {
         setDetailInfo(response.data);
       })
-      .catch((err) => console.log(err));
+      .catch();
     setModalOpen(true);
   };
   const closeModal = () => {

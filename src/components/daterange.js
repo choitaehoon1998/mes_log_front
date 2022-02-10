@@ -1,4 +1,3 @@
-import { popper } from "@popperjs/core";
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "./css/componentstyle.css";
