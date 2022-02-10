@@ -138,7 +138,9 @@
 .search-group {
   display: flex;
   flex-wrap: wrap;
+  align-items: flex-start;
 }
+
 .form-group {
   margin-bottom: 26px;
 }
