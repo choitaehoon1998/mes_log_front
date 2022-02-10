@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import "./errorLog.css";
+import "../components/css/errorLog.css";
 import axios from "axios";
 
-import ContentTitle from "../content/ContentTitel";
+import ContentTitle from "../components/ContentTitle";
 import SearchForm from "../components/SearchForm";
-import Thead from "./thead";
-import Tbody from "./tbody";
+import Thead from "../components/errors/errorsThead";
+import Tbody from "../components/errors/errorTbody";
 import { API_URL } from "../constant/constant";
 import DateRange from "../components/daterange";
 import Paging from "../components/Paging";
@@ -63,53 +63,64 @@ export default function ErrorLog() {
       <div className="content-wrap">
         <div className="content-main">
           <ContentTitle title="Error Log"></ContentTitle>
-          <SearchForm
-            title={"회사 코드"}
-            onchangeFunction={(value) => {
-              setSearchKeyword({ ...searchKeyword, companyCode: value });
-            }}
-          ></SearchForm>
-          <SearchForm
-            title={"유저 명"}
-            onchangeFunction={(value) => {
-              setSearchKeyword({ ...searchKeyword, userName: value });
-            }}
-          ></SearchForm>
-          <SearchForm
-            title={"예외 클래스"}
-            onchangeFunction={(value) => {
-              setSearchKeyword({ ...searchKeyword, exceptionClass: value });
-            }}
-          ></SearchForm>
-          <SearchForm
-            title={"예외 메세지"}
-            onchangeFunction={(value) => {
-              setSearchKeyword({ ...searchKeyword, exceptionMessage: value });
-            }}
-          ></SearchForm>
-          <SearchForm
-            title={"원격 호스트"}
-            onchangeFunction={(value) => {
-              setSearchKeyword({ ...searchKeyword, remoteHost: value });
-            }}
-          ></SearchForm>
-          <SearchForm
-            title={"요청 URL"}
-            onchangeFunction={(value) => {
-              setSearchKeyword({ ...searchKeyword, requestUri: value });
-            }}
-          ></SearchForm>
-          <SearchForm
-            title={"메소드 종류"}
-            onchangeFunction={(value) => {
-              setSearchKeyword({ ...searchKeyword, methodType: value });
-            }}
-          ></SearchForm>
-          <DateRange
-            onchangeFunction={(name, value) => {
-              setSearchKeyword({ ...searchKeyword, [name]: value });
-            }}
-          ></DateRange>
+
+          <section>
+            <div className="search-top">
+              <SearchForm
+                title={"회사 코드"}
+                onchangeFunction={(value) => {
+                  setSearchKeyword({ ...searchKeyword, companyCode: value });
+                }}
+              ></SearchForm>
+              <SearchForm
+                title={"유저 명"}
+                onchangeFunction={(value) => {
+                  setSearchKeyword({ ...searchKeyword, userName: value });
+                }}
+              ></SearchForm>
+              <SearchForm
+                title={"예외 클래스"}
+                onchangeFunction={(value) => {
+                  setSearchKeyword({ ...searchKeyword, exceptionClass: value });
+                }}
+              ></SearchForm>
+              <SearchForm
+                title={"예외 메세지"}
+                onchangeFunction={(value) => {
+                  setSearchKeyword({
+                    ...searchKeyword,
+                    exceptionMessage: value,
+                  });
+                }}
+              ></SearchForm>
+              <SearchForm
+                title={"원격 호스트"}
+                onchangeFunction={(value) => {
+                  setSearchKeyword({ ...searchKeyword, remoteHost: value });
+                }}
+              ></SearchForm>
+            </div>
+            <div className="search-bottom">
+              <SearchForm
+                title={"요청 URL"}
+                onchangeFunction={(value) => {
+                  setSearchKeyword({ ...searchKeyword, requestUri: value });
+                }}
+              ></SearchForm>
+              <SearchForm
+                title={"메소드 종류"}
+                onchangeFunction={(value) => {
+                  setSearchKeyword({ ...searchKeyword, methodType: value });
+                }}
+              ></SearchForm>
+              <DateRange
+                onchangeFunction={(name, value) => {
+                  setSearchKeyword({ ...searchKeyword, [name]: value });
+                }}
+              ></DateRange>
+            </div>
+          </section>
+
           <div className="main-frame">
             <div className="form-frame">
               <div className="form-groups">
