@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
-import ErrorModal from "../component/errormodalpop";
-import ErrorInput from "../component/errorinput";
-import TextArea from "../component/textarea";
-import { API_URL } from "../constant/constant";
+import ErrorModal from "./errormodalpop";
+import ErrorInput from "./errorinput";
+import TextArea from "./textarea";
+import { API_URL } from "../../constant/constant";
 function ErrorLogModal(props) {
   const [modalOpen, setModalOpen] = useState(false); //모달오픈
   const [detailInfo, setDetailInfo] = useState([]); //axios 로그조회

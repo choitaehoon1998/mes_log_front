@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import "./errorLog.css";
+import "../components/css/errorLog.css";
 import axios from "axios";
 
-import ContentTitle from "../content/ContentTitel";
+import ContentTitle from "../components/ContentTitle";
 import SearchForm from "../components/SearchForm";
-import Thead from "./thead";
-import Tbody from "./tbody";
+import Thead from "../components/errors/errorsThead";
+import Tbody from "../components/errors/errorTbody";
 import { API_URL } from "../constant/constant";
 import DateRange from "../components/daterange";
 export default function ErrorLog() {

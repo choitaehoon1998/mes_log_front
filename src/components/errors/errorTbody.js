@@ -1,5 +1,5 @@
 import React from "react";
-import ErrorLogModal from "../errorLogPage/errorLogmodal";
+import ErrorLogModal from "./errorLogmodal";
 
 export default function Tbody(props) {
   return (

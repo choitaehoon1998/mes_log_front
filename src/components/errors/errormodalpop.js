@@ -1,5 +1,5 @@
 import React from "react";
-import "./errorstlye/errormodalst.css";
+import "../css/errormodalst.css";
 import SmmitBnt from "./smmitbnt";
 
 const ErrorModal = (props) => {
