@@ -1,0 +1,59 @@
+@import url(./errorLog.css);
+
+/* seach-sec 검색 틀 */
+
+.seach-sec {
+  border-bottom: 1px solid #595959;
+  border-top: 1px solid #595959;
+  padding-top: 20px;
+}
+/* 메인 */
+.main-sec {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.list-sec {
+  width: 50%;
+  padding: 10px 0;
+}
+
+.newmember-sec {
+  width: 50%;
+}
+
+/* 폼 */
+.new-title {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 10px;
+}
+.btn-3 {
+  padding: 4px 14px;
+}
+/* .userbox {
+
+} */
+.user-label {
+  display: inline-block;
+  height: 30px;
+}
+
+.member-input {
+  border-radius: 2px;
+  border: 1px solid rgb(209, 209, 209);
+  height: 30px;
+  line-height: 30px;
+  background-color: #fff;
+  margin: 0 10px;
+  padding: 1px 10px;
+  display: inline-block;
+  outline: none;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 300;
+}
+
+.user-sec table tr td {
+  vertical-align: middle;
+}

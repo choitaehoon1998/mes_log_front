@@ -5,7 +5,7 @@
 /* 데이커 스타일 */
 
 .react-datepicker__triangle {
-  transform: translate(30px, 0px) !important;
+  transform: translate(50px, 0px) !important;
   z-index: 10 !important;
 }
 
