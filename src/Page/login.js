@@ -21,8 +21,8 @@ function LoginPage(props) {
                     <div className="h-inner">로그인</div>
                 </header>
                 
-                <input className="mt-10" type={"text"} placeholder=" ID" value={userId} onChange={onUserIdHandler} />
-                <input className="mt-10" type={"password"} placeholder=" Password" value={password} onChange={onPasswordHandler} />
+                <input className="mt-10" type={"text"} placeholder=" ID" />
+                <input className="mt-10" type={"password"} placeholder=" Password" />
                 <button className="b mt-20" type={"submit"}>Login</button>
 
             </form>
