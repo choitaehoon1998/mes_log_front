@@ -9,6 +9,7 @@ import Tbody from "../components/errors/errorTbody";
 import { API_URL } from "../constant/constant";
 import DateRange from "../components/daterange";
 import Paging from "../components/Paging";
+import { Link } from "react-router-dom";
 
 export default function ErrorLog() {
   let startDate = new Date();
@@ -64,6 +65,7 @@ export default function ErrorLog() {
     <>
       <div className="content-wrap">
         <div className="content-main">
+          <Link className="right" to="/login">로그인</Link>
           <ContentTitle title="Error Log"></ContentTitle>
 
           <section>

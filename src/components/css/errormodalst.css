@@ -170,6 +170,7 @@
   font-weight: 300;
 }
 
+
 /* 텍스트에리어 */
 .textsize {
   top: 0;
@@ -224,4 +225,14 @@
 }
 .b1 label:last-of-type {
   margin-left: 37px;
+}
+
+.right{
+  display: flex;
+  justify-content: right;
+  margin-top: 10px;
+}
+.right:hover{
+  text-decoration: underline;
+  color: #f44;
 }
