@@ -17,15 +17,19 @@
 }
 .b{
     height: 30px;
+    margin-bottom: 20px;
 }
 .f{
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
 }
 .mt-10{
     margin-top: 10px;
 }
 .mt-20{
     margin-top: 20px;
+}
+.bg{
+    background-color: aliceblue;
+    height: 100%;
 }

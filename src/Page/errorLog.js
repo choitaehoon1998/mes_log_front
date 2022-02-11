@@ -65,7 +65,10 @@ export default function ErrorLog() {
     <>
       <div className="content-wrap">
         <div className="content-main">
-          <Link className="right" to="/login">로그인</Link>
+          <div  className="r">
+            <Link className="right" to="/login">로그인</Link>
+          </div>
+
           <ContentTitle title="Error Log"></ContentTitle>
 
           <section>

@@ -226,11 +226,13 @@
 .b1 label:last-of-type {
   margin-left: 37px;
 }
-
-.right{
-  display: flex;
-  justify-content: right;
+.r{
   margin-top: 10px;
+}
+.right{
+  position: relative;
+  text-align: center;
+  margin-left: 85%;
 }
 .right:hover{
   text-decoration: underline;
