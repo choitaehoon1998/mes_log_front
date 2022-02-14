@@ -2,12 +2,13 @@ import axios from "axios";
 import React, { useState } from "react";
 import "../components/css/login.css";
 import { API_URL } from "../constant/constant";
-import { useDispatch } from "react-redux";
-import thunk from "redux-thunk";
+
 
 function LoginPage(props){
     const [Email, setEmail] = useState("");
     const [Password, setPassword] = useState("");
+    const [data, setData] = useState("");
+    const [token, setToken] = useState("");
 
     const onEmailHandler = (e) => {
         e.preventDefault();
@@ -25,15 +26,29 @@ function LoginPage(props){
         let body = {
             email: Email,
             password: Password,
-        };
-        axios
-        .post(API_URL + "/login", body)
-        .then((res) => console.log(res));
+        }
+        axios.post(API_URL+"/login", body)
+        .then(response => { 
+            setData(response.data);
+            setToken(response.data.accessToken)
+        })
     };
+    const accessToken = { accessToken: token};
+    if(data===""){
+        console.log("null")
+    }else{
+        console.log("ture")
+        window.localStorage.setItem("token" , JSON.stringify(accessToken));
+    }
+    const aa = window.localStorage.getItem("token");
+    if(aa===""){
+        console.log("null")
+    }else{
+        console.log(aa);
+    }
 
     return(
         <>
-        
         <div className="d">
             <form className="f" onSubmit={onSubmitHandler}>
                 

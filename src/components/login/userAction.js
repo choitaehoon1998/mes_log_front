@@ -1,10 +1,12 @@
 import { API_URL } from "../../constant/constant";
+import axios from "axios";
 import {LOGIN_USER} from "./types";
-import { request } from "./axios";
 
 
 export function loginUser(dataToSubmit){
-    const data = request("post", API_URL + "/login", dataToSubmit);
+    const data = axios.post(API_URL + "/login", dataToSubmit)
+        .then(response => response.data)
+        
     return {
         type: LOGIN_USER,
         payload: data,
