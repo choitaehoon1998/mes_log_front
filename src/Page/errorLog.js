@@ -46,6 +46,10 @@ export default function ErrorLog() {
           startDate: searchKeyword.startDate,
           endDate: searchKeyword.endDate,
         },
+        headers: {
+          accessToken:
+            "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwiaWF0IjoxNjQ0ODEzNzMwLCJleHAiOjE2NDQ4MjA5MzB9.MYyv4LsQl3g17pudDbkKnYKaDAd9z5C6ZchuBBc5jMM",
+        },
       })
       .then((response) => {
         setTotal(Math.ceil(response.data.totalElements));
@@ -57,7 +61,27 @@ export default function ErrorLog() {
           setPage(0);
         }
       })
-      .catch();
+      .catch((e) => {
+        if (e.response.status === 401) {
+          // accessKey에 문제가 있음.
+          axios
+            .get(API_URL + "/newAccessToken", {
+              headers: {
+                refreshToken:
+                  // "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiaOjE2NDYwMTQyMDV9.wbqrIiHuCTQxnWmQVxumPGDcaIS5ASNcLO6HioZTECE",
+                  "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwiaWF0IjoxNjQ0ODEzNzMwLCJleHAiOjE2NDYwMjMzMzB9.r75Nur0cUJa_AbB_eCuP89JgJ84nUITuLvOF8Z0G5No",
+              },
+            })
+            .then((response) => {
+              // 시간이 지나 ACCESS_TOKEN은 만료 되었지만, 정상적으로 ACCESS_TOKEN을 다시 받았기 때문에, 재조회
+            })
+            .catch((e) => {
+              if (e.response.status == 500) {
+                // accessToken, refreshToken 둘다 이상하다고 간주되니 . 로그인 페이지로 복귀
+              }
+            });
+        }
+      });
   }, [searchKeyword, page, total]);
 
   return (
@@ -140,7 +164,12 @@ export default function ErrorLog() {
                   ))}
                 </table>
 
-                <Paging page={page} total={total} setPage={setPage} totalPage={totalPage} />
+                <Paging
+                  page={page}
+                  total={total}
+                  setPage={setPage}
+                  totalPage={totalPage}
+                />
               </div>
             </div>
           </div>

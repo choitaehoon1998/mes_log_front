@@ -11,7 +11,12 @@ function ErrorLogModal(props) {
   // 모달 열고 닫기할때 로그 불러오기
   const openModal = async () => {
     await axios
-      .get(API_URL + "/log/" + props.state.id)
+      .get(API_URL + "/log/" + props.state.id, {
+        headers: {
+          accessToken:
+            "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwiaWF0IjoxNjQ0ODEzNzMwLCJleHAiOjE2NDQ4MjA5MzB9.MYyv4LsQl3g17pudDbkKnYKaDAd9z5C6ZchuBBc5jMM",
+        },
+      })
       .then((response) => {
         setDetailInfo(response.data);
       })
