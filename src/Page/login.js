@@ -2,9 +2,13 @@ import axios from "axios";
 import React, { useState } from "react";
 import "../components/css/login.css";
 import { API_URL } from "../constant/constant";
-
+import { useSelector, useDispatch } from 'react-redux';
+import { login, logout } from '../modules/changer';
 
 function LoginPage(props){
+    const status = useSelector(state => state.changer);
+    const dispatch = useDispatch();
+
     const [Email, setEmail] = useState("");
     const [Password, setPassword] = useState("");
     const [data, setData] = useState("");
@@ -20,17 +24,20 @@ function LoginPage(props){
     const onSubmitHandler = (e) => {
         e.preventDefault();
 
-        console.log(Email);
-        console.log(Password);
-
         let body = {
             email: Email,
             password: Password,
         }
         axios.post(API_URL+"/login", body)
         .then(response => { 
+            dispatch(logout());
+            console.log("a")
             setData(response.data);
             setToken(response.data.accessToken)
+            console.log(status)
+        }).catch((e)=>{
+            dispatch(login());
+            console.log(status)
         })
     };
     const accessToken = { accessToken: token};
