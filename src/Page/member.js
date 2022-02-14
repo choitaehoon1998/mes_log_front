@@ -24,8 +24,8 @@ export default function Member() {
   });
 
   const addUser = () => {
-    debugger;
-    return false;
+    // debugger;
+    // return false;
     if (!CheckBoxClick()) {
       alert("승인된 사원이 아닙니다.");
     } else {
@@ -53,7 +53,33 @@ export default function Member() {
         });
     }
   };
+  // 데이터 업데이트
+  const fixUser = () => {
+    axios
+      .put(
+        API_URL + "/member",
+        {
+          name: userData.name,
+          email: userData.email,
+          password: userData.password,
+          approved: userData.approved,
+        },
+        {
+          headers: {
+            accessToken:
+              "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiaWF0IjoxNjQ0ODExOTQ5LCJleHAiOjE2NDQ4MTkxNDl9.PRPJ1o42kaf9XMwv3gplVlts5RRqIOlMb4ZjHWXDGA0",
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
+  // 데이터 조회 get
   useEffect(() => {
     axios
       .get(API_URL + "/member", {
@@ -72,12 +98,16 @@ export default function Member() {
       });
   }, []);
 
+  // 체크박스와 버튼 연결
   const CheckBoxClick = () => {
     setCheckActive(!checkActive);
   };
 
+  // 테이블 클릭시 사용자 정보 값 호출
   function debuggerFnc(e) {
-    debugger;
+    const clickTdArray = Array.from(e.target.parentElement.childNodes);
+    const tdArray = clickTdArray.map((data) => data.textContent);
+    setUserData({ ...userData, name: tdArray[1], email: tdArray[2] });
   }
 
   return (
@@ -108,12 +138,20 @@ export default function Member() {
             <div className="newmember-sec">
               <div className="new-title">
                 <h3>사용자 정보</h3>
-                <button
-                  className={getIsActive ? "btn-3 btn-color" : "btn-color-none"}
-                  onClick={addUser}
-                >
-                  신규
-                </button>
+                <div>
+                  {" "}
+                  <button
+                    className={
+                      getIsActive ? "btn-3 btn-color" : "btn-color-none"
+                    }
+                    onClick={addUser}
+                  >
+                    신규
+                  </button>
+                  <button className="btn-3 btn-color" onClick={fixUser}>
+                    수정
+                  </button>
+                </div>
               </div>
               <div className="user-sec">
                 <table>
@@ -124,6 +162,7 @@ export default function Member() {
                       </td>
                       <td>
                         <UserInput
+                          value={userData.name}
                           handleChange={(value) => {
                             setUserData({ ...userData, name: value });
                           }}
@@ -134,6 +173,7 @@ export default function Member() {
                       </td>
                       <td>
                         <UserInput
+                          value={userData.email}
                           handleChange={(value) => {
                             setUserData({ ...userData, email: value });
                           }}
