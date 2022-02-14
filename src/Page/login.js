@@ -1,17 +1,14 @@
+import axios from "axios";
 import React, { useState } from "react";
 import "../components/css/login.css";
-import { useDispatch } from "react-redux";
-import { loginUser } from "../components/login/userAction"
+import { API_URL } from "../constant/constant"
 
 function LoginPage(props){
-
-    
-
     const [Email, setEmail] = useState("");
     const [Password, setPassword] = useState("");
-    const dispatch = useDispatch();
 
     const onEmailHandler = (e) => {
+        e.preventDefault();
         setEmail(e.currentTarget.value);
     }
     const onPasswordHandler = (e) => {
@@ -20,25 +17,17 @@ function LoginPage(props){
     const onSubmitHandler = (e) => {
         e.preventDefault();
 
-        const body = {
+        console.log(Email);
+        console.log(Password);
+
+        let body = {
             email: Email,
             password: Password,
         };
-        
-        dispatch(loginUser(body))
-            .then((res) => {
-            if(res.payload.loginSuccess){
-                props.history.push('/');
-            }else{
-                alert(res.payload.message);
-            }
-        })
-        .catch((err) => {
-            console.log(err);
-        })
+        axios
+        .post(API_URL + "/login", body)
+        .then((res) => console.log(res));
     };
-
-    
 
     return(
         <>
