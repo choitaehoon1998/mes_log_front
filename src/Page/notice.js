@@ -59,13 +59,15 @@ const Notis = () => {
     let newContent = { ...content };
     newContent.body = e;
     setContent(newContent);
-    console.log(content);
-    debugger;
   };
 
   const submitNotice = () => {
     // axios put 전송
     const dataBody = { ...content };
+    if (content.header === "") {
+      console.log("글 제목 입력하세요.");
+    }
+    console.log(content);
   };
 
   return (
