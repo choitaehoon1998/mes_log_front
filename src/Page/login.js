@@ -1,7 +1,9 @@
 import axios from "axios";
 import React, { useState } from "react";
 import "../components/css/login.css";
-import { API_URL } from "../constant/constant"
+import { API_URL } from "../constant/constant";
+import { useDispatch } from "react-redux";
+import thunk from "redux-thunk";
 
 function LoginPage(props){
     const [Email, setEmail] = useState("");
