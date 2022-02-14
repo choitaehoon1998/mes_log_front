@@ -10,17 +10,25 @@
 /* 메인 */
 .main-sec {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   flex-wrap: wrap;
 }
 
 .list-sec {
-  width: 50%;
-  padding: 10px 0;
+  width: 45%;
+  padding: 10px 10px;
+}
+
+.list-sec h3 {
+  margin-bottom: 20px;
+}
+.list-sec table {
+  width: 100%;
+  border: 1px #222 solid;
 }
 
 .newmember-sec {
-  width: 50%;
+  width: 45%;
 }
 
 /* 폼 */
@@ -56,4 +64,25 @@
 
 .user-sec table tr td {
   vertical-align: middle;
+  padding-right: 20px;
+}
+
+.user-sec table tr {
+  height: 60px;
+}
+
+/* 멤버체크 승인 */
+.membercheck-maim {
+  width: 45%;
+  padding: 10px 10px;
+}
+
+.btn-color-none {
+  background-color: #595959;
+  padding: 4px 14px;
+  color: #fff;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  transition: 0.2s;
 }

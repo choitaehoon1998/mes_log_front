@@ -1,67 +1,54 @@
-import React from "react";
-import "../components/css/membercheck.css";
+import React, { useEffect } from "react";
+
 import ContentTitle from "../components/ContentTitle";
 import SearchForm from "../components/SearchForm";
-import MemberCheckListThead from "../components/userCheck/userListThead";
-import MemberCheckListTbody from "../components/userCheck/userListTbody";
-import UserName from "../components/userCheck/userName";
-import UserPassWord from "../components/userCheck/userPassword";
-import UserEmail from "../components/userCheck/userEmail";
+import MemberCheckListThead from "../components/userCheck/userListckThead";
+import MemberCheckListTbody from "../components/userCheck/userListckTbody";
+import axios from "axios";
 
-export default function MemberCheck() {
+import { API_URL } from "../constant/constant";
+
+const MemberCheck = () => {
+  const headers = {
+    "content-type": "application/json;charset=UTF-8",
+    accessToken:
+      "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiaWF0IjoxNjQ0Nzk3ODg0LCJleHAiOjE2NDQ4MDUwODR9.Mm0gAsqd1ZKHBuNZbHV2iSz_JipzH_mXz9rP6VgXnJ8",
+  };
+
+  useEffect(() => {
+    axios
+      .put(
+        API_URL + "/member",
+        {},
+        {
+          headers,
+        }
+      )
+      .then((response) => {
+        const dateList = response;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  });
   return (
-    <>
-      <div className="content-wrap">
-        <div className="content-main">
-          <ContentTitle title="사용자 관리"></ContentTitle>
-          <div className="seach-sec">
-            <SearchForm title={"검색"} />
-          </div>
+    <div className="content-wrap">
+      <div className="content-main">
+        <ContentTitle title="사용자 승인"></ContentTitle>
+        <div className="seach-sec">
+          <SearchForm title={"검색"} />
+        </div>
 
-          <div className="main-sec">
-            <div className="list-sec">
-              <h3>사용자 목록</h3>
-              <table>
-                <MemberCheckListThead />
-                <MemberCheckListTbody />
-              </table>
-            </div>
-
-            <div className="newmember-sec">
-              <div className="new-title">
-                <h3>사용자 정보</h3>
-                <button className="btn-3 btn-color">신규</button>
-              </div>
-              <div className="user-sec">
-                <table>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <label className="user-label">이름</label>
-                      </td>
-                      <td>
-                        <UserName />
-                      </td>
-                      <td>
-                        <label className="user-label">이메일</label>
-                      </td>
-                      <td>
-                        <UserEmail />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>비밀번호</td>
-                      <td>
-                        <UserPassWord />
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
+        <div className="membercheck-maim">
+          <h3>사용자 목록</h3>
+          <table>
+            <MemberCheckListThead />
+            <MemberCheckListTbody />
+          </table>
         </div>
       </div>
-    </>
+    </div>
   );
-}
+};
+
+export default MemberCheck;
