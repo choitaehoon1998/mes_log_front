@@ -7,6 +7,7 @@ export default function UserInput(props) {
         type="text"
         name="user_info"
         value={props.value}
+        disabled={props.disalbed}
         onChange={(e) => props.handleChange(e.target.value)}
       />
     </>

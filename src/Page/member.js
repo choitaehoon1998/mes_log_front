@@ -14,9 +14,11 @@ import { API_URL } from "../constant/constant";
 export default function Member() {
   const [memberList, setMemberList] = useState([]);
   const [checkActive, setCheckActive] = useState(false);
+  const [emailDis, setEmailDis] = useState(false);
   const getIsActive = checkActive === true;
 
   const [userData, setUserData] = useState({
+    id: "",
     name: "",
     email: "",
     password: "",
@@ -24,24 +26,37 @@ export default function Member() {
   });
 
   const addUser = () => {
-    // debugger;
-    // return false;
-    if (!CheckBoxClick()) {
+    if (emailDis) {
+      setEmailDis(false);
+      return;
+    }
+
+    if (
+      userData.name === "" ||
+      userData.email === "" ||
+      userData.password === ""
+    ) {
+      alert("이름, 이메일, 비밀번호 확인해주세요");
+      return;
+    }
+
+    if (!checkActive) {
       alert("승인된 사원이 아닙니다.");
     } else {
       axios
         .post(
           API_URL + "/member",
           {
+            id: userData.id,
             name: userData.name,
             email: userData.email,
             password: userData.password,
-            approved: userData.approved,
+            isApproved: userData.approved,
           },
           {
             headers: {
               accessToken:
-                "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiaWF0IjoxNjQ0ODExOTQ5LCJleHAiOjE2NDQ4MTkxNDl9.PRPJ1o42kaf9XMwv3gplVlts5RRqIOlMb4ZjHWXDGA0",
+                "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NiwiaWF0IjoxNjQ0ODI2MTk5LCJleHAiOjE2NDQ4MzMzOTl9.L5D5gU1ROyRmHtbQhER3oPiumF21gp__jpCTyhBYtEs",
             },
           }
         )
@@ -53,21 +68,21 @@ export default function Member() {
         });
     }
   };
-  // 데이터 업데이트
+
+  // 데이터 업데이트 put
   const fixUser = () => {
     axios
       .put(
         API_URL + "/member",
         {
           name: userData.name,
-          email: userData.email,
           password: userData.password,
-          approved: userData.approved,
+          isApproved: userData.approved,
         },
         {
           headers: {
             accessToken:
-              "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiaWF0IjoxNjQ0ODExOTQ5LCJleHAiOjE2NDQ4MTkxNDl9.PRPJ1o42kaf9XMwv3gplVlts5RRqIOlMb4ZjHWXDGA0",
+              "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NiwiaWF0IjoxNjQ0ODI2MTk5LCJleHAiOjE2NDQ4MzMzOTl9.L5D5gU1ROyRmHtbQhER3oPiumF21gp__jpCTyhBYtEs",
           },
         }
       )
@@ -85,7 +100,7 @@ export default function Member() {
       .get(API_URL + "/member", {
         headers: {
           accessToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiaWF0IjoxNjQ0ODExOTQ5LCJleHAiOjE2NDQ4MTkxNDl9.PRPJ1o42kaf9XMwv3gplVlts5RRqIOlMb4ZjHWXDGA0",
+            "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NiwiaWF0IjoxNjQ0ODI2MTk5LCJleHAiOjE2NDQ4MzMzOTl9.L5D5gU1ROyRmHtbQhER3oPiumF21gp__jpCTyhBYtEs",
         },
       })
       .then((response) => {
@@ -104,10 +119,16 @@ export default function Member() {
   };
 
   // 테이블 클릭시 사용자 정보 값 호출
-  function debuggerFnc(e) {
+  function tableRowSelect(e) {
     const clickTdArray = Array.from(e.target.parentElement.childNodes);
     const tdArray = clickTdArray.map((data) => data.textContent);
-    setUserData({ ...userData, name: tdArray[1], email: tdArray[2] });
+    setUserData({
+      ...userData,
+      name: tdArray[0],
+      email: tdArray[1],
+      approved: tdArray[2] == "○" ? true : false,
+    });
+    setEmailDis(true);
   }
 
   return (
@@ -122,7 +143,7 @@ export default function Member() {
           <div className="main-sec">
             <div className="list-sec">
               <h3>사용자 목록</h3>
-              <table onClick={debuggerFnc}>
+              <table onClick={tableRowSelect}>
                 <MemberCheckListThead />
                 {memberList.map((data) => (
                   <MemberCheckListTbody
@@ -130,6 +151,7 @@ export default function Member() {
                     memberId={data.id}
                     name={data.name}
                     email={data.email}
+                    approved={data.isApproved}
                   ></MemberCheckListTbody>
                 ))}
               </table>
@@ -174,6 +196,7 @@ export default function Member() {
                       <td>
                         <UserInput
                           value={userData.email}
+                          disalbed={emailDis}
                           handleChange={(value) => {
                             setUserData({ ...userData, email: value });
                           }}
@@ -195,6 +218,7 @@ export default function Member() {
                 <input
                   type="checkbox"
                   value={userData.approved}
+                  checked={userData.approved}
                   onClick={CheckBoxClick}
                   onChange={(e) => {
                     setUserData({ ...userData, approved: e.target.checked });
