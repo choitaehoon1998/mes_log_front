@@ -97,6 +97,9 @@ export default function ErrorLog() {
             <Link to="/member">
               <button>멤버</button>
             </Link>
+            <Link to="/notice">
+              <button>공지사항</button>
+            </Link>
           </div>
 
           <ContentTitle title="Error Log"></ContentTitle>

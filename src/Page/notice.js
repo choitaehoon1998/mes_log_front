@@ -4,6 +4,8 @@ import SearchForm from "../components/SearchForm";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import Input from "../components/errors/errorinput";
+import { Link } from "react-router-dom";
+import LogoutButton from "../components/logoutButton";
 
 const Notis = () => {
   const quillRef = useRef();
@@ -74,6 +76,15 @@ const Notis = () => {
     <>
       <div className="content-wrap">
         <div className="content-main">
+          <div className="r">
+            <LogoutButton>로그아웃</LogoutButton>
+            <Link to="/log">
+              <button>로그</button>
+            </Link>
+            <Link to="/member">
+              <button>멤버</button>
+            </Link>
+          </div>
           <ContentTitle title="Notice"></ContentTitle>
           <section>
             <div className="search-group">

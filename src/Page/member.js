@@ -191,6 +191,9 @@ export default function Member() {
             <Link to="/log">
               <button>로그</button>
             </Link>
+            <Link to="/notice">
+              <button>공지사항</button>
+            </Link>
           </div>
 
           <ContentTitle title="사용자 관리"></ContentTitle>
