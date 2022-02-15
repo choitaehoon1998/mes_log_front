@@ -40,6 +40,9 @@
 .btn-3 {
   padding: 4px 14px;
 }
+.btn-3:first-child {
+  margin-right: 10px;
+}
 /* .userbox {
 
 } */
@@ -85,4 +88,5 @@
   outline: none;
   border: none;
   transition: 0.2s;
+  margin-right: 10px;
 }
