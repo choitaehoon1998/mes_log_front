@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { logout } from "../modules/changer";
 
 import { Link } from "react-router-dom";
+import LogoutButton from "../components/logoutButton";
 
 export default function Member() {
   const dispatch = useDispatch();
@@ -182,7 +183,12 @@ export default function Member() {
     <>
       <div className="content-wrap">
         <div className="content-main">
-          <Link to="/log">로그</Link>
+          <div className="r">
+            <LogoutButton>로그아웃</LogoutButton>
+            <Link to="/log">
+              <button>로그</button>
+            </Link>
+          </div>
 
           <ContentTitle title="사용자 관리"></ContentTitle>
           <div className="seach-sec">

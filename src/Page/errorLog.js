@@ -94,7 +94,9 @@ export default function ErrorLog() {
         <div className="content-main">
           <div className="r">
             <LogoutButton>로그아웃</LogoutButton>
-            <Link to="/member">멤버</Link>
+            <Link to="/member">
+              <button>멤버</button>
+            </Link>
           </div>
 
           <ContentTitle title="Error Log"></ContentTitle>
