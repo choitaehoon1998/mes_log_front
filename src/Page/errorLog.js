@@ -9,9 +9,16 @@ import Tbody from "../components/errors/errorTbody";
 import { API_URL } from "../constant/constant";
 import DateRange from "../components/daterange";
 import Paging from "../components/Paging";
+import LogoutButton from "../components/logoutButton";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../modules/changer";
+import { Link } from "react-router-dom";
 
 export default function ErrorLog() {
+  const dispatch = useDispatch();
   let startDate = new Date();
+
+  const status = useSelector((state) => state.changer);
 
   startDate.setMonth(startDate.getMonth() - 1);
   const [errors, setErrors] = useState([]);
@@ -31,6 +38,8 @@ export default function ErrorLog() {
   });
 
   useEffect(() => {
+    const accessToken = window.localStorage.getItem("accessToken");
+    const refreshToken = window.localStorage.getItem("refreshToken");
     axios
       .get(API_URL + "/log", {
         params: {
@@ -46,6 +55,9 @@ export default function ErrorLog() {
           startDate: searchKeyword.startDate,
           endDate: searchKeyword.endDate,
         },
+        headers: {
+          accessToken: accessToken,
+        },
       })
       .then((response) => {
         setTotal(Math.ceil(response.data.totalElements));
@@ -57,13 +69,34 @@ export default function ErrorLog() {
           setPage(0);
         }
       })
-      .catch();
-  }, [searchKeyword, page, total]);
+      .catch((e) => {
+        axios
+          .get(API_URL + "/newAccessToken", {
+            headers: {
+              refreshToken: refreshToken,
+            },
+          })
+          .then((response) => {
+            window.localStorage.setItem(
+              "accessToken",
+              response.data.accessToken
+            );
+          })
+          .catch((e) => {
+            dispatch(logout());
+          });
+      });
+  }, [searchKeyword, page, total, status]);
 
   return (
     <>
       <div className="content-wrap">
         <div className="content-main">
+          <div className="r">
+            <LogoutButton>로그아웃</LogoutButton>
+            <Link to="/member">멤버</Link>
+          </div>
+
           <ContentTitle title="Error Log"></ContentTitle>
 
           <section>
@@ -140,7 +173,12 @@ export default function ErrorLog() {
                   ))}
                 </table>
 
-                <Paging page={page} total={total} setPage={setPage} totalPage={totalPage} />
+                <Paging
+                  page={page}
+                  total={total}
+                  setPage={setPage}
+                  totalPage={totalPage}
+                />
               </div>
             </div>
           </div>
