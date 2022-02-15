@@ -11,12 +11,21 @@ import axios from "axios";
 
 import { API_URL } from "../constant/constant";
 
+import { useDispatch } from "react-redux";
+import { logout } from "../modules/changer";
+
+import { Link } from "react-router-dom";
+import LogoutButton from "../components/logoutButton";
+
 export default function Member() {
+  const dispatch = useDispatch();
+
   const [memberList, setMemberList] = useState([]);
   const [checkActive, setCheckActive] = useState(false);
   const [emailDis, setEmailDis] = useState(false);
   const getIsActive = checkActive === true;
-
+  const accessToken = window.localStorage.getItem("accessToken");
+  const refreshToken = window.localStorage.getItem("refreshToken");
   const [userData, setUserData] = useState({
     id: "",
     name: "",
@@ -55,8 +64,7 @@ export default function Member() {
           },
           {
             headers: {
-              accessToken:
-                "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NiwiaWF0IjoxNjQ0ODI2MTk5LCJleHAiOjE2NDQ4MzMzOTl9.L5D5gU1ROyRmHtbQhER3oPiumF21gp__jpCTyhBYtEs",
+              accessToken: accessToken,
             },
           }
         )
@@ -64,7 +72,21 @@ export default function Member() {
           console.log(response);
         })
         .catch((error) => {
-          console.log(error);
+          axios
+            .get(API_URL + "/newAccessToken", {
+              headers: {
+                refreshToken: refreshToken,
+              },
+            })
+            .then((response) => {
+              window.localStorage.setItem(
+                "accessToken",
+                response.data.accessToken
+              );
+            })
+            .catch((e) => {
+              dispatch(logout());
+            });
         });
     }
   };
@@ -81,8 +103,7 @@ export default function Member() {
         },
         {
           headers: {
-            accessToken:
-              "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NiwiaWF0IjoxNjQ0ODI2MTk5LCJleHAiOjE2NDQ4MzMzOTl9.L5D5gU1ROyRmHtbQhER3oPiumF21gp__jpCTyhBYtEs",
+            accessToken: accessToken,
           },
         }
       )
@@ -90,7 +111,21 @@ export default function Member() {
         console.log(response);
       })
       .catch((error) => {
-        console.log(error);
+        axios
+          .get(API_URL + "/newAccessToken", {
+            headers: {
+              refreshToken: refreshToken,
+            },
+          })
+          .then((response) => {
+            window.localStorage.setItem(
+              "accessToken",
+              response.data.accessToken
+            );
+          })
+          .catch((e) => {
+            dispatch(logout());
+          });
       });
   };
 
@@ -99,8 +134,7 @@ export default function Member() {
     axios
       .get(API_URL + "/member", {
         headers: {
-          accessToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NiwiaWF0IjoxNjQ0ODI2MTk5LCJleHAiOjE2NDQ4MzMzOTl9.L5D5gU1ROyRmHtbQhER3oPiumF21gp__jpCTyhBYtEs",
+          accessToken: accessToken,
         },
       })
       .then((response) => {
@@ -109,7 +143,21 @@ export default function Member() {
         console.log(response);
       })
       .catch((error) => {
-        console.log(error);
+        axios
+          .get(API_URL + "/newAccessToken", {
+            headers: {
+              refreshToken: refreshToken,
+            },
+          })
+          .then((response) => {
+            window.localStorage.setItem(
+              "accessToken",
+              response.data.accessToken
+            );
+          })
+          .catch((e) => {
+            dispatch(logout());
+          });
       });
   }, []);
 
@@ -138,6 +186,13 @@ export default function Member() {
     <>
       <div className="content-wrap">
         <div className="content-main">
+          <div className="r">
+            <LogoutButton>로그아웃</LogoutButton>
+            <Link to="/log">
+              <button>로그</button>
+            </Link>
+          </div>
+
           <ContentTitle title="사용자 관리"></ContentTitle>
           <div className="seach-sec">
             <SearchForm title={"검색"} />

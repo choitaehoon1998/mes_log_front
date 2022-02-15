@@ -4,18 +4,43 @@ import ErrorModal from "./errormodalpop";
 import ErrorInput from "./errorinput";
 import TextArea from "./textarea";
 import { API_URL } from "../../constant/constant";
+import { useDispatch } from "react-redux";
+import { logout } from "../../modules/changer";
 function ErrorLogModal(props) {
+  const dispatch = useDispatch();
+
   const [modalOpen, setModalOpen] = useState(false); //모달오픈
   const [detailInfo, setDetailInfo] = useState([]); //axios 로그조회
-
+  const accessToken = window.localStorage.getItem("accessToken");
+  const refreshToken = window.localStorage.getItem("refreshToken");
   // 모달 열고 닫기할때 로그 불러오기
   const openModal = async () => {
     await axios
-      .get(API_URL + "/log/" + props.state.id)
+      .get(API_URL + "/log/" + props.state.id, {
+        headers: {
+          accessToken: accessToken,
+        },
+      })
       .then((response) => {
         setDetailInfo(response.data);
       })
-      .catch();
+      .catch((e) => {
+        axios
+          .get(API_URL + "/newAccessToken", {
+            headers: {
+              refreshToken: refreshToken,
+            },
+          })
+          .then((response) => {
+            window.localStorage.setItem(
+              "accessToken",
+              response.data.accessToken
+            );
+          })
+          .catch((e) => {
+            dispatch(logout());
+          });
+      });
     setModalOpen(true);
   };
   const closeModal = () => {

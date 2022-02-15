@@ -130,16 +130,16 @@
   outline: none;
   border: none;
 }
-.btn-p::before{
+.btn-p::before {
   content: "<";
 }
-.btn-n::before{
+.btn-n::before {
   content: ">";
 }
-.btn-f::before{
+.btn-f::before {
   content: "<<";
 }
-.btn-e::before{
+.btn-e::before {
   content: ">>";
 }
 .btn-2 {
@@ -224,4 +224,16 @@
 }
 .b1 label:last-of-type {
   margin-left: 37px;
+}
+.r {
+  margin-top: 10px;
+}
+.right {
+  position: relative;
+  text-align: center;
+  margin-left: 85%;
+}
+.right:hover {
+  text-decoration: underline;
+  color: #f44;
 }
