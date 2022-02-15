@@ -9,7 +9,7 @@ import Tbody from "../components/errors/errorTbody";
 import { API_URL } from "../constant/constant";
 import DateRange from "../components/daterange";
 import Paging from "../components/Paging";
-import { Link } from "react-router-dom";
+import LogoutButton from "../components/logoutButton";
 
 export default function ErrorLog() {
   let startDate = new Date();
@@ -65,8 +65,8 @@ export default function ErrorLog() {
     <>
       <div className="content-wrap">
         <div className="content-main">
-          <div  className="r">
-            <Link className="right" to="/login">로그인</Link>
+          <div className="r">
+            <LogoutButton>로그아웃</LogoutButton>
           </div>
 
           <ContentTitle title="Error Log"></ContentTitle>
@@ -145,7 +145,12 @@ export default function ErrorLog() {
                   ))}
                 </table>
 
-                <Paging page={page} total={total} setPage={setPage} totalPage={totalPage} />
+                <Paging
+                  page={page}
+                  total={total}
+                  setPage={setPage}
+                  totalPage={totalPage}
+                />
               </div>
             </div>
           </div>

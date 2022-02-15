@@ -1,14 +1,26 @@
-import React from "react";
-import { useRoutes } from "react-router-dom";
+import React, { useEffect } from "react";
 import ErrorLog from "./Page/errorLog";
 import LoginPage from "./Page/login";
+import { Route, Routes } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { login, logout } from "./modules/changer";
 
 export default function Router() {
+  const dispatch = useDispatch();
+  const status = useSelector((state) => state.changer);
 
-  window.localStorage.getItem("token")
+  useEffect(() => {
+    const accessToken = window.localStorage.getItem("accessToken");
+    const refreshToken = window.localStorage.getItem("refreshToken");
 
-  return useRoutes([
-    { path: "/", element: <ErrorLog /> },
-    { path: "/login", element: <LoginPage /> }
-  ]);
+    if (!(accessToken === null) && !(refreshToken === null)) {
+      dispatch(login());
+    }
+  }, []);
+
+  return (
+    <Routes>
+      <Route path="/" element={status ? <ErrorLog /> : <LoginPage />}></Route>
+    </Routes>
+  );
 }
