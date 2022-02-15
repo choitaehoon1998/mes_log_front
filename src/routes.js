@@ -3,7 +3,7 @@ import ErrorLog from "./Page/errorLog";
 import LoginPage from "./Page/login";
 import { Route, Routes } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { login, logout } from "./modules/changer";
+import { login } from "./modules/changer";
 
 export default function Router() {
   const dispatch = useDispatch();

@@ -2,11 +2,10 @@ import axios from "axios";
 import React, { useState } from "react";
 import "../components/css/login.css";
 import { API_URL } from "../constant/constant";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { login, logout } from "../modules/changer";
 
 function LoginPage(props) {
-  const status = useSelector((state) => state.changer);
   const dispatch = useDispatch();
 
   const [Email, setEmail] = useState("");
