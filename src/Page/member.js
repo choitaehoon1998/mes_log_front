@@ -24,8 +24,6 @@ export default function Member() {
   });
 
   const addUser = () => {
-    debugger;
-    return false;
     if (!CheckBoxClick()) {
       alert("승인된 사원이 아닙니다.");
     } else {
