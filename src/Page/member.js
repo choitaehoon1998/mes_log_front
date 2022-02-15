@@ -120,15 +120,18 @@ export default function Member() {
 
   // 테이블 클릭시 사용자 정보 값 호출
   function tableRowSelect(e) {
-    const clickTdArray = Array.from(e.target.parentElement.childNodes);
-    const tdArray = clickTdArray.map((data) => data.textContent);
-    setUserData({
-      ...userData,
-      name: tdArray[0],
-      email: tdArray[1],
-      approved: tdArray[2] == "○" ? true : false,
-    });
-    setEmailDis(true);
+    if (e.target.parentElement.tagName === "TR") {
+      const clickTdArray = Array.from(e.target.parentElement.childNodes);
+      const tdArray = clickTdArray.map((data) => data.textContent);
+
+      setUserData({
+        ...userData,
+        name: tdArray[0],
+        email: tdArray[1],
+        approved: tdArray[2] == "○" ? true : false,
+      });
+      setEmailDis(true);
+    }
   }
 
   return (
@@ -145,6 +148,7 @@ export default function Member() {
               <h3>사용자 목록</h3>
               <table onClick={tableRowSelect}>
                 <MemberCheckListThead />
+                <MemberCheckListTbody />
                 {memberList.map((data) => (
                   <MemberCheckListTbody
                     key={data.id}
