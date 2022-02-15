@@ -29,9 +29,11 @@ function LoginPage(props) {
     axios
       .post(API_URL + "/login", body)
       .then((response) => {
-        dispatch(login());
         window.localStorage.setItem("accessToken", response.data.accessToken);
         window.localStorage.setItem("refreshToken", response.data.refreshToken);
+      })
+      .then(() => {
+        dispatch(login());
       })
       .catch((e) => {
         dispatch(logout());
